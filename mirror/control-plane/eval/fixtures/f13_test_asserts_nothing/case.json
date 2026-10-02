@@ -1,0 +1,44 @@
+{
+  "id": "f13_test_asserts_nothing",
+  "title": "Tests assert only that something came back",
+  "origin": "functional-test-reviewer: reject assertions that prove execution rather than outcome",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "tests/test_reconcile.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "assert|vacuous|truthy|not None|proves nothing|\\bok\\b|outcome",
+      "file": "tests/test_reconcile.py",
+      "line": 6
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "functional-test-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer",
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R1",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "functional-test-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

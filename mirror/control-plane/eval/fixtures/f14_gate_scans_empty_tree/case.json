@@ -1,0 +1,44 @@
+{
+  "id": "f14_gate_scans_empty_tree",
+  "title": "Architecture gate scans a directory that does not exist",
+  "origin": "Ferma testing bar: a gate that passes by checking nothing is the failure mode this repository was bitten by",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "tests/test_architecture.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "empty|vacuous|nonexistent|missing|scans nothing|non-empty|zero files|self-check",
+      "file": "tests/test_architecture.py",
+      "line": 7
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "functional-test-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer",
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R1",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "functional-test-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

@@ -1,0 +1,559 @@
+{
+  "_meta": {
+    "purpose": "Single source of truth for WHICH agents get spawned for a given code unit. Read by project workflows AND by Claude when triaging manually -- one table, not two drifting copies.",
+    "created": "2026-08-03",
+    "rule_pointer": "~/.claude/CLAUDE.md -> 'Agent Routing by Group + Stack Profile'",
+    "core_principle": "Triggers are evaluated by CODE (path globs + import greps), never by an extra LLM triage call. A triage agent per unit would itself cost tokens and defeat the purpose.",
+    "measured_2026_08_03": {
+      "top10_roster_per_unit_tokens": 55860,
+      "group_A_only_tokens": 3373,
+      "group_A_plus_1_trigger_tokens": 5951,
+      "typical_saving_per_unit": "-89%",
+      "caveat": "ml-engineer is UNDERCOUNTED in this estimate (tools:[] = all tool schemas). Real saving when the ML trigger fires is larger, not smaller."
+    },
+    "regrouped_2026_08_04": "Operator-directed, two steps. (1) ml-engineer/database-reviewer/seo-specialist moved B->C (entrypoint-only). (2) Same three moved C->T: not needed on ~99% of projects (only 1-4 of 8 projects even carry the required stack tag), and even on a project where relevant, must not fire per-file/per-entrypoint or ride along in a consensus roster -- spawn only when the task genuinely IS ML-pipeline / DB-schema / SEO work. architect/code-architect moved C->B (now per-unit-triggered, bundled with group A) and stayed there. See each agent's 'group_note' in triggers{} for the mechanical consequence.",
+    "regrouped_2026_08_05": "Operator-directed, two steps same day. (1) python-reviewer, silent-failure-hunter, flutter-reviewer moved A->B, cpp-reviewer folded in for structural consistency (no stack_profile carries a 'cpp' tag today, so that fold was a no-op in practice). A_baseline went empty -- nothing unconditional, every lens needing its own trigger. (2) Operator flagged (quoting the B policy back) that this meant B's own 'never just-in-case' rule now left units with zero baseline coverage when no trigger fired -- asked to restore <language-reviewer-slot> + silent-failure-hunter to A. Explicitly asked whether the OTHER six B members touched in step 1's neighborhood (code-reviewer, fastapi-reviewer, a11y-architect, functional-test-reviewer, architect, code-architect) should also go unconditional; operator chose to leave those six exactly as they already were (proper stack-tag/path triggers, never part of A to begin with) -- confirming their existing domain scoping is intentional, not an oversight. Net result: A_baseline is back to its original two-slot shape (language-slot now also covers flutter/cpp, which it always implicitly did via by_extension), B_domain_triggered is back to its pre-2026-08-05 membership."
+  },
+  "groups": {
+    "S_opt_in_only": {
+      "policy": "NEVER automatic. Spawn ONLY on the operator's explicit request.",
+      "on_signal": "Flag the unit as 'security-reviewer recommended' in the report -- do not spawn.",
+      "agents": [
+        "security-reviewer"
+      ],
+      "operator_rule": "Set 2026-08-03. Overrides any earlier advice to auto-run security passes on connectors / training_servers / auth paths."
+    },
+    "A_baseline": {
+      "policy": "ALWAYS, on every code unit. Exactly 2 lenses: one language reviewer (resolved by extension) + silent-failure-hunter.",
+      "agents": [
+        "<language-reviewer-slot>",
+        "silent-failure-hunter"
+      ],
+      "rationale": "silent-failure-hunter is not speculative -- it is the lens that caught the real bugs in the 2026-08 audit. (Briefly moved to B_domain_triggered on 2026-08-05, then restored the same day once the operator flagged that B's 'never just-in-case' policy meant an unmatched unit got zero baseline coverage -- see _meta.regrouped_2026_08_05.)"
+    },
+    "B_domain_triggered": {
+      "policy": "Spawn ONLY when a deterministic trigger actually fires in the unit. Never 'just in case'.",
+      "agents": [
+        "code-reviewer",
+        "fastapi-reviewer",
+        "performance-optimizer",
+        "type-design-analyzer",
+        "a11y-architect",
+        "functional-test-reviewer",
+        "architect",
+        "code-architect",
+        "product-ux-reviewer",
+        "reliability-reviewer"
+      ]
+    },
+    "C_structural_entrypoint": {
+      "policy": "Entry-point units only (repo src root, main/orchestrator, wiring modules) -- typically 4-5 units, never all of them. Architectural judgement does not scale to a 5-file leaf directory.",
+      "agents": [],
+      "status": "Intentionally empty as of 2026-08-04 (operator decision, option 1 of 3 offered). architect/code-architect moved to B; ml-engineer/database-reviewer/seo-specialist moved to T. The policy text above is kept as a template in case a future agent genuinely needs entry-point-only semantics -- it is not a bug that this list is empty."
+    },
+    "D_test": {
+      "policy": "tests/ units.",
+      "agents": [
+        "functional-test-reviewer",
+        "pr-test-analyzer",
+        "tdd-guide"
+      ],
+      "notes": {
+        "pr-test-analyzer": "ONLY for an actual pull request. Outside a PR its diff framing does not apply -- use functional-test-reviewer instead.",
+        "tdd-guide": "Only when writing a NEW feature test-first, not when auditing existing code."
+      }
+    },
+    "E_deferred_style": {
+      "policy": "Do NOT spawn during an audit. Separate low-priority pass only. These produce NIT/style, not BLOCKER/MAJOR -- the cheapest finding class per token spent.",
+      "agents": [
+        "comment-analyzer",
+        "refactor-cleaner",
+        "code-simplifier",
+        "doc-updater"
+      ]
+    },
+    "R_reactive_on_failure": {
+      "policy": "Spawn ONLY in response to a real failure or a live-state question. Never during static review.",
+      "agents": [
+        "build-error-resolver",
+        "cpp-build-resolver",
+        "dart-build-resolver",
+        "pytorch-build-resolver",
+        "network-troubleshooter",
+        "training-inspector"
+      ]
+    },
+    "N_recon": {
+      "policy": "One call BEFORE triage on T3/T4 plans, to enumerate real files + domains. Cuts 30-50% of just-in-case agents.",
+      "agents": [
+        "code-explorer",
+        "Explore"
+      ]
+    },
+    "P_planning": {
+      "policy": "Reviews a PROPOSED PLAN, not existing code. Do NOT include in a code audit -- these agents evaluate phase sequencing and scope, they do not find bugs in files.",
+      "agents": [
+        "planner",
+        "Plan",
+        "architect"
+      ],
+      "note": "architect has a dual role: B_domain_triggered for code (moved from C 2026-08-04), P_planning for plans."
+    },
+    "T_task_scoped": {
+      "policy": "Only when doing that exact task.",
+      "agents": [
+        "opensource-forker",
+        "opensource-packager",
+        "opensource-sanitizer",
+        "harness-optimizer",
+        "conversation-analyzer",
+        "loop-operator",
+        "e2e-runner",
+        "network-config-reviewer",
+        "statusline-setup",
+        "claude-code-guide",
+        "ml-engineer",
+        "database-reviewer",
+        "seo-specialist",
+        "implementation-engineer"
+      ]
+    },
+    "F_excluded_by_stack": {
+      "policy": "COMPUTED, never hardcoded. Any agent whose required stack tag is absent from the project's stack_profile is excluded. flutter-reviewer is F for a Python project and A for a Flutter one.",
+      "agents": []
+    }
+  },
+  "language_reviewer_slot": {
+    "_comment": "Resolves the A_baseline language lens. Most-specific wins: a project-level agent of the same name overrides the global one (e.g. AI trading's python-reviewer adds a cp1252/non-ASCII check). Briefly marked SUPERSEDED on 2026-08-05 when A_baseline went empty; restored the same day -- see _meta.regrouped_2026_08_05.",
+    "resolution": "project-level .claude/agents/<name>.md  >  global ~/.claude/agents/<name>.md",
+    "by_extension": {
+      ".py": "python-reviewer",
+      ".dart": "flutter-reviewer",
+      ".cpp": "cpp-reviewer",
+      ".cc": "cpp-reviewer",
+      ".h": "cpp-reviewer",
+      ".hpp": "cpp-reviewer"
+    },
+    "no_framework_override": "A framework does NOT replace the language lens. A FastAPI file is still Python and still needs python-reviewer; fastapi-reviewer is an ADDITIONAL Group B specialist, not a substitute. (Design fixed 2026-08-03 after the rqdo-platform survey -- a 100%-Python FastAPI repo would have lost its Python lens entirely under the old override.)"
+  },
+  "triggers": {
+    "ml-engineer": {
+      "stack_tags_required": [
+        "ml"
+      ],
+      "paths": [
+        "**/trainers/**",
+        "**/alpha_lab/**",
+        "**/models/**",
+        "**/training/**",
+        "**/research/**"
+      ],
+      "imports": [
+        "torch",
+        "sklearn",
+        "lightgbm",
+        "xgboost",
+        "mlfinlab",
+        "pytorch_lightning",
+        "darts"
+      ],
+      "group_note": "[Moved to group T 2026-08-04 by operator: spawn ONLY when the task at hand IS this specialty (implementing/reviewing an ML pipeline; designing/reviewing a DB schema or query; running an SEO audit) -- never as a per-file or per-entrypoint automatic trigger, and never included by default in a consensus/plan-review roster. The paths/imports below are informational only.]"
+    },
+    "fastapi-reviewer": {
+      "stack_tags_required": [
+        "fastapi"
+      ],
+      "imports": [
+        "fastapi",
+        "APIRouter",
+        "uvicorn"
+      ],
+      "note": "ADDITIONAL to the language reviewer, never instead of it. Route/endpoint/dependency files only -- not every file in a FastAPI repo."
+    },
+    "database-reviewer": {
+      "stack_tags_required": [
+        "sql-duckdb",
+        "sql-postgres",
+        "sql-oracle",
+        "sql-sqlite"
+      ],
+      "imports": [
+        "duckdb",
+        "sqlite3",
+        "psycopg",
+        "psycopg2",
+        "sqlalchemy",
+        "cx_Oracle",
+        "oracledb"
+      ],
+      "content_regex": [
+        "(?i)\\b(select|insert into|update .* set|delete from|create table|merge into)\\b"
+      ],
+      "group_note": "[Moved to group T 2026-08-04 by operator: spawn ONLY when the task at hand IS this specialty (implementing/reviewing an ML pipeline; designing/reviewing a DB schema or query; running an SEO audit) -- never as a per-file or per-entrypoint automatic trigger, and never included by default in a consensus/plan-review roster. The paths/imports below are informational only.]"
+    },
+    "performance-optimizer": {
+      "paths": [
+        "**/orderbook_*",
+        "**/aggtrade_*",
+        "**/realtime_*",
+        "**/execution/**",
+        "**/hot/**"
+      ],
+      "note": "Hot paths only. A config loader does not need a perf lens."
+    },
+    "type-design-analyzer": {
+      "content_regex": [
+        "@dataclass",
+        "\\bclass \\w+\\(Enum\\)",
+        "\\bProtocol\\b",
+        "\\bTypedDict\\b"
+      ],
+      "threshold": "3+ matches in the unit"
+    },
+    "code-reviewer": {
+      "paths": [
+        "src/**",
+        "lib/**",
+        "app/**"
+      ],
+      "note": "Broad trigger. Prompt MUST state 'there is no diff here -- read the given files directly', since its default framing assumes git diff."
+    },
+    "functional-test-reviewer": {
+      "paths": [
+        "tests/**",
+        "test/**"
+      ],
+      "also_when": "a src/ unit's behavioral coverage is in question",
+      "availability": "GLOBAL since 2026-08-03 (~/.claude/agents/) -- available to every project. 'AI trading assistance' keeps a project-level override carrying its gate-named test convention and its money-path risk list; most-specific wins, same rule as the language-reviewer slot.",
+      "note": "Never substitute pr-test-analyzer for it outside a real PR."
+    },
+    "a11y-architect": {
+      "stack_tags_required": [
+        "web-frontend",
+        "dart-flutter"
+      ],
+      "paths": [
+        "**/*.html",
+        "**/*.jsx",
+        "**/*.tsx",
+        "**/widgets/**",
+        "**/templates/**"
+      ]
+    },
+    "seo-specialist": {
+      "stack_tags_required": [
+        "web-public"
+      ],
+      "note": "Public marketing pages only. Never for an internal dashboard.",
+      "group_note": "[Moved to group T 2026-08-04 by operator: spawn ONLY when the task at hand IS this specialty (implementing/reviewing an ML pipeline; designing/reviewing a DB schema or query; running an SEO audit) -- never as a per-file or per-entrypoint automatic trigger, and never included by default in a consensus/plan-review roster. The paths/imports below are informational only.]"
+    },
+    "architect": {
+      "unit_kind": [
+        "entrypoint",
+        "orchestrator",
+        "repo-root"
+      ],
+      "group_note": "[Moved to group B 2026-08-04 by operator: now evaluated per-unit like a domain specialist and bundled into the same prompt as group A (per_unit_algorithm step 4), rather than a separate call reserved for entrypoints.]"
+    },
+    "code-architect": {
+      "unit_kind": [
+        "entrypoint",
+        "orchestrator",
+        "repo-root"
+      ],
+      "group_note": "[Moved to group B 2026-08-04 by operator: now evaluated per-unit like a domain specialist and bundled into the same prompt as group A (per_unit_algorithm step 4), rather than a separate call reserved for entrypoints.]"
+    },
+    "product-ux-reviewer": {
+      "paths": [
+        "**/ui/**",
+        "**/components/**",
+        "**/screens/**",
+        "**/pages/**",
+        "**/views/**"
+      ],
+      "also_when": "user journey, interaction state, information hierarchy or UX behavior changes",
+      "note": "UI/product-flow changes only; do not spawn on backend-only diffs."
+    },
+    "reliability-reviewer": {
+      "paths": [
+        "**/workers/**",
+        "**/queues/**",
+        "**/jobs/**",
+        "**/connectors/**",
+        "**/services/**"
+      ],
+      "also_when": "retries, timeouts, async delivery, restart/recovery or partial failure semantics change",
+      "note": "Operational failure semantics only; do not spawn just because code is networked."
+    },
+    "implementation-engineer": {
+      "task_scope": "explicit implementation/fix/refactor request after scope is known",
+      "note": "Executor, not independent reviewer. Never include in review consensus for its own change."
+    }
+  },
+  "stack_profiles": {
+    "_comment": "The 'essence of the project' passed to triage so only relevant agents are considered. Kept HERE, in session infrastructure, rather than as files scattered into 7 project dirs (One Session = One Project).",
+    "D:\\Repo\\AI_trading_assistance": {
+      "tags": [
+        "python",
+        "sql-duckdb",
+        "ml",
+        "web-frontend"
+      ],
+      "excluded_examples": [
+        "flutter-reviewer",
+        "cpp-reviewer",
+        "fastapi-reviewer",
+        "seo-specialist",
+        "dart-build-resolver"
+      ]
+    },
+    "D:\\Repo\\Fitness_App": {
+      "tags": [
+        "dart-flutter",
+        "typescript",
+        "firebase",
+        "web-frontend"
+      ],
+      "language_reviewer_override": "fitness-flutter-reviewer (project-level)",
+      "excluded_examples": [
+        "python-reviewer",
+        "ml-engineer",
+        "database-reviewer",
+        "cpp-reviewer"
+      ]
+    },
+    "D:\\Repo\\Life_Companion": {
+      "tags": [
+        "python",
+        "fastapi",
+        "sql-postgres",
+        "dart-flutter"
+      ],
+      "excluded_examples": [
+        "cpp-reviewer",
+        "ml-engineer",
+        "seo-specialist"
+      ]
+    },
+    "D:\\Repo\\arbitrage_strategy": {
+      "tags": [
+        "python",
+        "sql-duckdb",
+        "web3"
+      ],
+      "excluded_examples": [
+        "flutter-reviewer",
+        "cpp-reviewer",
+        "a11y-architect",
+        "seo-specialist"
+      ]
+    },
+    "D:\\test 2\\Remote control": {
+      "path_note": "Left under D:\\test 2 deliberately (2026-08-15 audit): D:\\Repo\\Remote_Quality_Delivery_Office_Platform_rqdo is a different, unrelated project (backend/core/data/docker-compose 'platform'), not a migration of this one. No D:\\Repo equivalent exists for this project as of this audit.",
+      "tags": [
+        "python"
+      ],
+      "excluded_examples": [
+        "ml-engineer",
+        "database-reviewer",
+        "flutter-reviewer",
+        "a11y-architect"
+      ],
+      "historical": true,
+      "historical_note": "Path no longer exists (CLAUDE.md: old D:\\test 2 / D:\\rqdo-platform paths are historical). Current RQDO lives in D:\\Repo\\Remote_Quality_Delivery_Office_Platform_rqdo."
+    },
+    "D:\\test 2\\Remote v2": {
+      "path_note": "Left under D:\\test 2 deliberately (2026-08-15 audit) -- same reasoning as the Remote control entry above: no D:\\Repo equivalent exists.",
+      "tags": [
+        "infra"
+      ],
+      "note": "Config/relay ops, not an application codebase. Most review agents do not apply.",
+      "historical": true,
+      "historical_note": "Path no longer exists (CLAUDE.md: old D:\\test 2 / D:\\rqdo-platform paths are historical). Current RQDO lives in D:\\Repo\\Remote_Quality_Delivery_Office_Platform_rqdo."
+    },
+    "D:\\Repo\\db-test-tool-analysis": {
+      "tags": [
+        "python",
+        "fastapi",
+        "sql-oracle",
+        "web-frontend"
+      ],
+      "project_agents": [
+        "excel-drd-specialist",
+        "plsql-oracle-guru"
+      ],
+      "excluded_examples": [
+        "ml-engineer",
+        "flutter-reviewer",
+        "cpp-reviewer"
+      ]
+    },
+    "D:\\rqdo-platform": {
+      "tags": [
+        "python",
+        "fastapi",
+        "sql-postgres",
+        "infra"
+      ],
+      "verified": "2026-08-03 by read-only survey of tracked files",
+      "evidence": {
+        "python": "198 tracked .py / 15,294 LOC; all 16 package manifests pin >=3.12,<3.13; ruff target py312",
+        "fastapi": "fastapi>=0.110 in api_gateway + service_kit; FastAPI app factory in api_gateway/main.py; 12 uvicorn service entrypoints",
+        "sql-postgres": "postgres:16 compose image; postgresql+psycopg:// DSNs; SQLAlchemy 2.0 + psycopg3 + 10 Alembic migrations; PostgresContainer in tests",
+        "infra": "12 Dockerfiles, 15-service docker-compose, CI with 9 gates, .importlinter, 7 tools/check_*.py"
+      },
+      "excluded_examples": [
+        "ml-engineer",
+        "flutter-reviewer",
+        "cpp-reviewer",
+        "seo-specialist",
+        "database-reviewer(duckdb/oracle/sqlite variants)"
+      ],
+      "explicitly_absent": {
+        "ml": "zero matches for torch/sklearn/lightgbm/xgboost/transformers - and no numpy/pandas either. LLM work is SPEC-ONLY (docs/G_AI_0_SPEC.md: 'NOT built'). Do NOT route ml-engineer here.",
+        "typescript": "zero .ts/.tsx files. TS exists only as a PROPOSAL in core/PLAN_CONTROL_CENTER_REPLACEMENT_2026-07-29.md (gate G-UI-3). Do not route TS work here yet.",
+        "sql-oracle": "the word 'oracle' appears only as a security term ('login timing oracle') and in a CI denylist - there is no Oracle DB.",
+        "javascript": "node/npm/lighthouse exist ONLY inside the performance_baseline_service container image; the Python code shells out to the lighthouse CLI. Do not infer a JS stack."
+      },
+      "web_frontend_caveat": "NOT tagged web-frontend despite a frontend/ dir. It holds ONE 46KB Appsmith low-code export (frontend/appsmith/control_center.json) plus a runbook -- no frontend source, no build toolchain, no package.json. a11y-architect would misfire on it, and tools/check_appsmith_export.py rejects hand-authored JSON.",
+      "routing_notes": [
+        "Monorepo: 16 independently-installable packages (backend/{shared_contracts,service_kit,db,api_gateway} + 12 services/*), each with its own pyproject.toml and src/ layout. Root pyproject is NOT a package -- it holds only pytest/ruff config. Treat each package as its own unit, not the repo as one unit.",
+        "Architecture is CI-enforced, not review-enforced: .importlinter + 7 tools/check_*.py gates block cross-service imports, contracts impurity, DB access in analysis services, non-ASCII console strings, pydantic v1. An architectural violation FAILS CI -- architect/code-architect add less here than in a repo without such gates.",
+        "Tests live beside each package (16 tests/ dirs + repo-level tests/), all enumerated in root [tool.pytest.ini_options] testpaths. pytest 8 only, zero unittest. Marker 'integration' needs Docker/testcontainers; Docker-free bar is `pytest -m \"not integration\"`.",
+        "docs/INDEX.md is the documentation authority (several other docs self-describe as stale). Read it before trusting any other doc."
+      ],
+      "governance_warning": "This project does NOT inherit D:\\test 2\\CLAUDE.md. It runs its own bare-command protocol (commit-only, never auto-push, agent review opt-in) defined in its own CLAUDE.md + core/STATE.md. Read those FIRST before acting in that repo -- the rules in this machine's volume file do not apply there.",
+      "historical": true,
+      "historical_note": "Path no longer exists (CLAUDE.md: old D:\\test 2 / D:\\rqdo-platform paths are historical). Current RQDO lives in D:\\Repo\\Remote_Quality_Delivery_Office_Platform_rqdo."
+    }
+  },
+  "per_unit_algorithm": [
+    "1. Load the project's stack_profile -> anything requiring an absent tag goes to F_excluded.",
+    "2. Group A: resolve the language-reviewer slot by extension (project-level override wins) + silent-failure-hunter. Always 2.",
+    "3. Group B: evaluate each trigger against the unit's paths / imports / content. Add only those that actually fire.",
+    "4. Bundle A + fired-B into ONE prompt for the unit -- not one spawn per lens.",
+    "5. Group C: only if the unit is an entrypoint/orchestrator -- a separate, additional call.",
+    "6. Group D: replaces the roster entirely for tests/ units.",
+    "7. Groups E / R / T / P / S: not spawned by this algorithm. S is flagged-only; the rest need their own explicit trigger or operator request."
+  ],
+  "_control_plane_v2": {
+    "effective": "2026-10-02",
+    "model_policy": "~/.claude/control-plane/model_policy.json",
+    "automatic_model": "sonnet",
+    "minimum_family": "Sonnet 5.5",
+    "opus": "explicit operator consent per run; high only",
+    "unresolved_agent_policy": "disabled legacy entries are never spawned; preserve for history until operator separately approves removal",
+    "disabled_unresolved_agents": [
+      "claude-code-guide",
+      "conversation-analyzer",
+      "cpp-build-resolver",
+      "cpp-reviewer",
+      "harness-optimizer",
+      "loop-operator",
+      "network-config-reviewer",
+      "network-troubleshooter",
+      "opensource-forker",
+      "opensource-packager",
+      "opensource-sanitizer",
+      "pr-test-analyzer",
+      "seo-specialist",
+      "statusline-setup",
+      "training-inspector"
+    ],
+    "disabled_note_cpp_reviewer": "No C++ reviewer exists globally; the .cpp/.cc/.h/.hpp language slot is disabled until one is created."
+  },
+  "risk_routing": {
+    "effective": "2026-10-02",
+    "principle": "Risk requires an agent -> the router selects the agent -> the model policy selects the cheapest sufficient model and effort. An agent existing is never a reason to invoke it. Triggers are evaluated by code (path globs, imports), never by an extra LLM triage call.",
+    "model_policy": "~/.claude/control-plane/model_policy.json",
+    "opus": "Never automatic. Per-run operator consent, effort=high only, xhigh forbidden. No consent receipt mechanism exists, so hooks/agent_model_gate.py fails closed.",
+    "tiers": {
+      "R0": {
+        "change": "trivial edit: typo, comment, formatting, docs-only, rename without behavior change",
+        "reviewers": {
+          "min": 0,
+          "max": 0
+        },
+        "adjudicator": false
+      },
+      "R1": {
+        "change": "focused change in one unit with one dominant risk",
+        "reviewers": {
+          "min": 1,
+          "max": 1
+        },
+        "adjudicator": false
+      },
+      "R2": {
+        "change": "cross-file or cross-domain change",
+        "reviewers": {
+          "min": 2,
+          "max": 4
+        },
+        "adjudicator": false
+      },
+      "R3": {
+        "change": "critical: money, auth/tenancy, data loss or migration, privacy, financial, release gate",
+        "reviewers": {
+          "min": 4,
+          "max": 6,
+          "rule": "smallest complete panel that covers every material risk surface from the risk map"
+        },
+        "adjudicator": "only for a genuine BLOCKER/MAJOR disagreement between reviewers"
+      }
+    },
+    "effort_tiers": {
+      "T1": {
+        "effort": "low",
+        "maxTurns": "6-8",
+        "use": "explorer, docs, comments, mechanical inspection"
+      },
+      "T2": {
+        "effort": "medium",
+        "maxTurns": "8-20",
+        "use": "ordinary implementation, language review, functional checks"
+      },
+      "T3": {
+        "effort": "high",
+        "maxTurns": "10-16",
+        "use": "architecture, database, reliability, complex integration"
+      },
+      "T4": {
+        "effort": "xhigh",
+        "maxTurns": "12-20",
+        "use": "security-critical, privacy, financial risk, red-team, adjudication"
+      }
+    },
+    "agent_effort_tier": {
+      "code-explorer": "T1",
+      "comment-analyzer": "T1",
+      "doc-updater": "T1",
+      "build-error-resolver": "T2",
+      "code-simplifier": "T2",
+      "dart-build-resolver": "T2",
+      "fastapi-reviewer": "T2",
+      "flutter-reviewer": "T2",
+      "functional-test-reviewer": "T2",
+      "implementation-engineer": "T2",
+      "python-reviewer": "T2",
+      "refactor-cleaner": "T2",
+      "tdd-guide": "T2",
+      "type-design-analyzer": "T2",
+      "a11y-architect": "T3",
+      "architect": "T3",
+      "code-architect": "T3",
+      "code-reviewer": "T3",
+      "database-reviewer": "T3",
+      "e2e-runner": "T3",
+      "ml-engineer": "T3",
+      "performance-optimizer": "T3",
+      "planner": "T3",
+      "product-ux-reviewer": "T3",
+      "pytorch-build-resolver": "T3",
+      "reliability-reviewer": "T3",
+      "silent-failure-hunter": "T3",
+      "security-reviewer": "T4"
+    },
+    "note": "Effort is fixed per agent definition (the Agent tool has no per-call effort). Project-level critical roles (financial, privacy, adjudicator) declare T4 in their own frontmatter."
+  }
+}

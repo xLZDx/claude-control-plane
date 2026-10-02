@@ -1,0 +1,48 @@
+{
+  "id": "f07_not_in_null",
+  "title": "NOT IN against a nullable column returns no rows",
+  "origin": "db-test-tool-analysis: syntactic SQL validity never proves business correctness (NULL / three-valued logic)",
+  "stack_tags": [
+    "python",
+    "sql-postgres"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/reports/orphans.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "NOT IN|NULL|three-valued|NOT EXISTS",
+      "file": "src/reports/orphans.py",
+      "line": 3
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R2",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "database-reviewer",
+    "python-reviewer",
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

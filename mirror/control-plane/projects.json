@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "effective": "2026-10-02",
+  "note": "Canonical project roots under D:\\Repo. Everything else with a .claude directory is a worktree or temporary copy and is counted separately, never as an independent agent set. historical_nonrunnable = control plane is kept for reference and is excluded from runnable policy checks.",
+  "repo_root": "D:/Repo",
+  "canonical": {
+    "agents-skills-repo": {},
+    "AI_trading_assistance": {"interpreter_pinned": true},
+    "AIRA": {},
+    "arbitrage_strategy": {},
+    "db-test-tool-analysis": {},
+    "equipment-model-pipeline": {},
+    "ERP": {},
+    "Ferma": {},
+    "Fitness_App": {},
+    "ivan-ai-company": {"historical_nonrunnable": true, "reason": "overlaps Virtual_marketing_company; its three agents declare model opus"},
+    "Life_Companion": {},
+    "Personal_Decision_Command_Center": {},
+    "pm-bridge": {},
+    "Remote_Quality_Delivery_Office_Platform_rqdo": {"workspace_prefix": "rqdo-"},
+    "TENDER": {},
+    "Virtual_marketing_company": {}
+  },
+  "temporary_copies": ["PDCC_visual_tmp2", "PDCC_staging_runtime", "PDCC_toolchain_tmp", "_mvp_validation_0da1dba7"],
+  "limits": {
+    "global_instruction_tokens": 6000,
+    "project_instruction_tokens": 4000,
+    "max_turns": 25,
+    "skill_thin_front_door_tokens": 800,
+    "skill_stub_tokens": 150
+  }
+}

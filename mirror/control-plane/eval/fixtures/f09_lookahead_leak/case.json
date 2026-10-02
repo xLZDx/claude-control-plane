@@ -1,0 +1,50 @@
+{
+  "id": "f09_lookahead_leak",
+  "title": "Rolling feature computed from the future return",
+  "origin": "AI trading: look-ahead / post-outcome data entering features (backtest-leakage-adversary)",
+  "stack_tags": [
+    "python",
+    "ml"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/features/build.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "BLOCKER",
+      "keywords": "leak|look-?ahead|future|ret_next|shift",
+      "file": "src/features/build.py",
+      "line": 8
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R2",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "backtest-leakage-adversary",
+    "financial-ml-reviewer",
+    "quant-research-reviewer",
+    "ml-engineer"
+  ],
+  "project_scope_agents": [
+    "backtest-leakage-adversary",
+    "financial-ml-reviewer"
+  ],
+  "acceptable_extra": []
+}

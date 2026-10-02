@@ -1,0 +1,45 @@
+{
+  "id": "f01_empty_ledger_green",
+  "title": "Reconcile reports ok when nothing was compared",
+  "origin": "Ferma GATE F0: reconciling an empty ledger returned ok=True",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/ledger/reconcile.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "empty|zip|truncat|length|false (green|positive)|vacuous|nothing",
+      "file": "src/ledger/reconcile.py",
+      "line": 5
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R3",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

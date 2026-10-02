@@ -1,0 +1,47 @@
+{
+  "id": "f06_retry_non_idempotent_payment",
+  "title": "Retried payout POST with no idempotency key",
+  "origin": "RQDO orchestrator lifecycle audit: at-least-once delivery, retry and idempotency",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/workers/payments.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "BLOCKER",
+      "keywords": "idempot|duplicate|double|retry|timeout|twice",
+      "file": "src/workers/payments.py",
+      "line": 7
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer",
+      "reliability-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R3",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "reliability-reviewer",
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

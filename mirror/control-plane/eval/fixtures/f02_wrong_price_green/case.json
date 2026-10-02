@@ -1,0 +1,45 @@
+{
+  "id": "f02_wrong_price_green",
+  "title": "Price comparator tolerance larger than the unit price step",
+  "origin": "Ferma GATE F0: a trade posted at 9.00 when the correct price was 10.00 also returned ok=True",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/pricing/compare.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "toler|tol\\b|float|9\\.00|10\\.00|price|loose",
+      "file": "src/pricing/compare.py",
+      "line": 1
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R2",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

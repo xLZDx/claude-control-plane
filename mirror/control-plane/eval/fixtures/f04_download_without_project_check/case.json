@@ -1,0 +1,50 @@
+{
+  "id": "f04_download_without_project_check",
+  "title": "Item download endpoint skips the per-project authorization the list endpoint has",
+  "origin": "RQDO tenancy audit: per-project access must hold on every read/list/download endpoint",
+  "stack_tags": [
+    "python",
+    "fastapi"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/api/downloads.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "BLOCKER",
+      "keywords": "project|authoriz|IDOR|object.?level|ownership|tenant|access control",
+      "file": "src/api/downloads.py",
+      "line": 15
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer",
+      "fastapi-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R3",
+    "expected_flagged": [
+      "security-reviewer"
+    ]
+  },
+  "catchable_by": [
+    "security-reviewer",
+    "fastapi-reviewer",
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

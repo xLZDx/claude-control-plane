@@ -1,0 +1,48 @@
+{
+  "id": "f12_n_plus_one_hot_path",
+  "title": "Per-order account lookup inside the execution loop",
+  "origin": "performance-optimizer scope: hot paths only (execution/); N+1 queries",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/execution/book.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "N\\+1|per.?row|per.?order|loop|batch|join|round.?trip",
+      "file": "src/execution/book.py",
+      "line": 4
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer",
+      "performance-optimizer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R2",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "performance-optimizer",
+    "database-reviewer",
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

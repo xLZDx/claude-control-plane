@@ -1,0 +1,5 @@
+.export-stage/
+__pycache__/
+*.pyc
+.env
+*.log

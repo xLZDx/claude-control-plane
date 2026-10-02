@@ -1,0 +1,46 @@
+{
+  "id": "f05_swallowed_exception",
+  "title": "Notifier swallows every send failure and still reports ok",
+  "origin": "silent-failure-hunter caught the real bugs in the 2026-08 audit",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/jobs/notify.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "swallow|except|silent|status.?ok|ignored|pass|failure",
+      "file": "src/jobs/notify.py",
+      "line": 12
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer",
+      "reliability-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R2",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "silent-failure-hunter",
+    "reliability-reviewer",
+    "python-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

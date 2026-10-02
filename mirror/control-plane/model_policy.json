@@ -1,0 +1,19 @@
+{
+  "version": "2.0",
+  "effective": "2026-10-02",
+  "minimum_agent_family": "Claude Sonnet 5.5",
+  "default_model_alias": "sonnet",
+  "automatic_agent_models": ["sonnet"],
+  "future_rule": "A newer Sonnet-class model may replace Sonnet 5.5 when the sonnet alias advances; never downgrade below Sonnet 5.5.",
+  "effort_tiers": {"T1":"low","T2":"medium","T3":"high","T4":"xhigh"},
+  "default_effort": "medium",
+  "opus": {
+    "automatic": false,
+    "explicit_operator_consent_per_run": true,
+    "allowed_effort": "high",
+    "xhigh_forbidden": true
+  },
+  "lower_models": {"haiku":false,"fable":false},
+  "project_overrides_may_weaken_policy": false,
+  "enforcement": ["settings-default","agent-frontmatter-lint","PreToolUse Agent model gate"]
+}

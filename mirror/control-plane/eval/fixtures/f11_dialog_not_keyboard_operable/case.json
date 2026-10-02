@@ -1,0 +1,45 @@
+{
+  "id": "f11_dialog_not_keyboard_operable",
+  "title": "Dialog close control is a span without role or keyboard handling",
+  "origin": "a11y-architect: keyboard/focus, semantics and names on touched UI",
+  "stack_tags": [
+    "web-frontend",
+    "typescript"
+  ],
+  "unit_kind": null,
+  "files": [
+    "web/components/Dialog.tsx"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "keyboard|focus|role|button|aria|escape|span|accessib",
+      "file": "web/components/Dialog.tsx",
+      "line": 7
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "silent-failure-hunter",
+      "a11y-architect",
+      "product-ux-reviewer"
+    ],
+    "forbidden_agents": [
+      "reliability-reviewer",
+      "fastapi-reviewer",
+      "performance-optimizer",
+      "python-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R2",
+    "expected_flagged": []
+  },
+  "catchable_by": [
+    "a11y-architect",
+    "product-ux-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

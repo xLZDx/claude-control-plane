@@ -1,0 +1,49 @@
+# claude-control-plane
+
+A public, versioned mirror of a personal Claude Code **AI control plane**: global operating contract,
+agent roster, skills, hooks, risk-based routing, model/effort policy, and the lint + eval tooling that
+keeps them consistent.
+
+It exists so that every change to the policy surface shows up as a reviewable git diff instead of
+drifting silently on one machine.
+
+## Layout
+
+| Path | What it is |
+| --- | --- |
+| `mirror/CLAUDE.md` | Global operating contract (authority, GO, evidence, routing, git discipline) |
+| `mirror/agent_routing.json` | Risk tiers R0-R3, effort tiers T1-T4, per-agent tier |
+| `mirror/agents/` | Global agent definitions (frontmatter: model, effort, maxTurns, skills) |
+| `mirror/skills/` | Reusable skills (thin `SKILL.md` + `references/`) |
+| `mirror/hooks/` | PreToolUse/Stop hooks, including the Agent model gate |
+| `mirror/commands/`, `mirror/core/`, `mirror/tools/` | Slash commands, decision log, helper tools and their tests |
+| `mirror/control-plane/` | `agentctl.py` lint, `model_policy.json`, deprecation rules, tests, offline router eval |
+| `scripts/export_from_claude_home.py` | Allowlist exporter with a fail-closed secret scan |
+
+## Model policy (summary)
+
+All automatic agents use the `sonnet` alias, Sonnet 5.5 minimum. Effort is risk-based
+(`low`/`medium`/`high`/`xhigh`). Opus is never automatic: only with explicit operator consent for that
+run, only at `high`. Haiku and lower families are not permitted for agents.
+
+## Tracking changes
+
+```
+python -s scripts/test_export.py
+python -s scripts/export_from_claude_home.py      # refreshes mirror/, aborts on any secret hit
+git add -A && git status && git diff --cached      # read the whole diff before committing
+```
+
+The exporter copies only the names listed in `INCLUDE`. It does not copy `settings.json`, memory,
+session transcripts, credentials, backups or generated registries. Files deleted at the source are
+deleted from the mirror.
+
+## What is deliberately not here
+
+`settings.json` (machine-specific permissions and hook wiring), per-project memory, session history,
+backups, and any project repository content. Paths such as `C:\Users\<name>` inside the mirrored files
+are the author's real Windows paths; adapt them to your machine.
+
+## Status
+
+Personal configuration shared as reference, not a supported product. No warranty. See `LICENSE`.

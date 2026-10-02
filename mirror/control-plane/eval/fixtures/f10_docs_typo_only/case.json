@@ -1,0 +1,33 @@
+{
+  "id": "f10_docs_typo_only",
+  "title": "Documentation typo fix (no code)",
+  "origin": "Router precision: a trivial change must not spawn any reviewer",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "docs/README.md"
+  ],
+  "seeded_defects": [],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer",
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer",
+      "reliability-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R0",
+    "expected_flagged": []
+  },
+  "catchable_by": [],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

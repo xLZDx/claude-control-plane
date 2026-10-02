@@ -1,0 +1,48 @@
+{
+  "id": "f08_untrusted_xml",
+  "title": "Stdlib XML parser on an uploaded JUnit report",
+  "origin": "RQDO importer audit: XXE/DoS defenses on XML parsing of client-supplied reports",
+  "stack_tags": [
+    "python"
+  ],
+  "unit_kind": null,
+  "files": [
+    "src/importers/junit.py"
+  ],
+  "seeded_defects": [
+    {
+      "id": "D1",
+      "min_severity": "MAJOR",
+      "keywords": "XXE|entity|defusedxml|untrusted|DoS|billion|expansion",
+      "file": "src/importers/junit.py",
+      "line": 5
+    }
+  ],
+  "line_tolerance": 3,
+  "routing": {
+    "expected_agents": [
+      "python-reviewer",
+      "silent-failure-hunter",
+      "code-reviewer"
+    ],
+    "forbidden_agents": [
+      "a11y-architect",
+      "product-ux-reviewer",
+      "flutter-reviewer",
+      "fastapi-reviewer"
+    ],
+    "allowed_extra_agents": [],
+    "expected_tier": "R3",
+    "expected_flagged": [
+      "security-reviewer"
+    ]
+  },
+  "catchable_by": [
+    "security-reviewer",
+    "python-reviewer",
+    "silent-failure-hunter",
+    "code-reviewer"
+  ],
+  "project_scope_agents": [],
+  "acceptable_extra": []
+}

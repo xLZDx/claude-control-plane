@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "effective": "2026-10-02",
+  "note": "Data-driven deprecation rules read by hooks/agent_model_gate.py. A rule applies when the agent name matches and the resolved agent path or the session cwd contains one of path_markers (so worktree copies of an older branch are covered too). Legacy files are kept for history; they are not automatically runnable. Frontmatter 'deprecated: true' is honored in addition.",
+  "rules": [
+    {
+      "project": "Personal_Decision_Command_Center",
+      "path_markers": ["personal_decision_command_center", "personal-decision-command-center", "\\pdcc_"],
+      "agents": {
+        "ai-01": "pdcc-ai-boundary-reviewer",
+        "data-01": "pdcc-db-reviewer / pdcc-semantic-reviewer",
+        "gov-01": "pdcc-gov-reviewer",
+        "priv-01": "pdcc-privacy-reviewer",
+        "qa-01": "pdcc-test-reviewer",
+        "red-01": "pdcc-redteam-reviewer",
+        "rel-01": "pdcc-rel-reviewer",
+        "sec-01": "pdcc-sec-reviewer",
+        "ux-01": "pdcc-ux-reviewer"
+      }
+    }
+  ]
+}
