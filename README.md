@@ -29,10 +29,14 @@ run, only at `high`. Haiku and lower families are not permitted for agents.
 ## Tracking changes
 
 ```
-python -s scripts/test_export.py
-python -s scripts/export_from_claude_home.py      # refreshes mirror/, aborts on any secret hit
-git add -A && git status && git diff --cached      # read the whole diff before committing
+python -s scripts/track.py              # tests + export + local commit, only if something changed
+python -s scripts/track.py --push       # same, then push to origin/main
+python -s scripts/track.py --message "why the policy changed"
 ```
+
+`track.py` runs the exporter tests and the exporter (which aborts on any secret hit) before it stages
+anything, and commits with the GitHub noreply identity. To review by hand instead, run
+`scripts/export_from_claude_home.py` and read `git diff` before committing.
 
 The exporter copies only the names listed in `INCLUDE`. It does not copy `settings.json`, memory,
 session transcripts, credentials, backups or generated registries. Files deleted at the source are
