@@ -37,13 +37,13 @@ class LanguageInventoryTests(unittest.TestCase):
 
     def test_text_decoding_rejects_binary_data(self) -> None:
         self.assertIsNone(decode_text(b"ab\x00cd"))
-        self.assertEqual(decode_text("Русский".encode("utf-8")), "Русский")
+        self.assertEqual(decode_text("\u0420\u0443\u0441\u0441\u043a\u0438\u0439".encode("utf-8")), "\u0420\u0443\u0441\u0441\u043a\u0438\u0439")
 
     def test_scan_uses_committed_blob_not_dirty_worktree(self) -> None:
         with tempfile.TemporaryDirectory(prefix="git-language-inventory-") as name:
             root = Path(name)
             run_git(root, "init")
-            (root / "README.md").write_text("# Привет\n", encoding="utf-8")
+            (root / "README.md").write_text("# \u041f\u0440\u0438\u0432\u0435\u0442\n", encoding="utf-8")
             (root / "app.py").write_text("# English only\n", encoding="utf-8")
             run_git(root, "add", "README.md", "app.py")
             run_git(
@@ -65,7 +65,7 @@ class LanguageInventoryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="git-language-limits-") as name:
             root = Path(name)
             run_git(root, "init")
-            (root / "README.md").write_text("# Привет\n", encoding="utf-8")
+            (root / "README.md").write_text("# \u041f\u0440\u0438\u0432\u0435\u0442\n", encoding="utf-8")
             run_git(root, "add", "README.md")
             run_git(
                 root, "-c", "user.name=Test", "-c", "user.email=test@example.invalid",
