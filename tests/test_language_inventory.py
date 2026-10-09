@@ -81,9 +81,9 @@ class LanguageInventoryTests(unittest.TestCase):
             root = Path(name)
             run_git(root, "init")
             (root / "README.md").write_text(
-                "version https://git-lfs.github.com/spec/v1\\n"
-                + "oid sha256:" + ("a" * 64) + "\\n"
-                + "size 1000000\\n", encoding="utf-8",
+                "version https://git-lfs.github.com/spec/v1\n"
+                + "oid sha256:" + ("a" * 64) + "\n"
+                + "size 1000000\n", encoding="utf-8",
             )
             run_git(root, "add", "README.md")
             run_git(
