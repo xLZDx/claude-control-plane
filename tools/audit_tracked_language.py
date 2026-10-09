@@ -93,6 +93,7 @@ def scan(repo: Path, max_bytes: int) -> dict[str, object]:
 
     results: list[dict[str, object]] = []
     skipped_decode: list[str] = []
+    skipped_lfs: list[str] = []
     if candidates:
         process = subprocess.Popen(
             ["git", "-C", str(repo), "cat-file", "--batch"],
@@ -113,6 +114,10 @@ def scan(repo: Path, max_bytes: int) -> dict[str, object]:
                 data = process.stdout.read(size)
                 if len(data) != size or process.stdout.read(1) != b"\n":
                     raise RuntimeError("GIT_BLOB_TRUNCATED")
+                if data.startswith(b"version https://git-lfs.github.com/spec/v1\n"):
+                    # The tracked blob is an LFS pointer, not the actual content.
+                    skipped_lfs.append(path)
+                    continue
                 value = decode_text(data)
                 if value is None:
                     skipped_decode.append(path)
@@ -143,7 +148,8 @@ def scan(repo: Path, max_bytes: int) -> dict[str, object]:
         "match_count": len(results),
         "skipped_too_large": sorted(skipped_large),
         "skipped_non_utf8_or_binary": sorted(skipped_decode),
-        "is_complete": not skipped_large and not skipped_decode,
+        "skipped_lfs_pointer": sorted(skipped_lfs),
+        "is_complete": not skipped_large and not skipped_decode and not skipped_lfs,
         "warning": (
             "Contains Git-tracked committed blobs at one HEAD only. "
             "Does not audit other branches, Issues, PRs, review threads, or locale semantics. "
