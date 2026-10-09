@@ -76,5 +76,24 @@ class LanguageInventoryTests(unittest.TestCase):
             self.assertEqual(report["skipped_too_large"], ["README.md"])
 
 
+    def test_lfs_pointer_is_not_treated_as_fetched_document(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="git-language-lfs-") as name:
+            root = Path(name)
+            run_git(root, "init")
+            (root / "README.md").write_text(
+                "version https://git-lfs.github.com/spec/v1\\n"
+                + "oid sha256:" + ("a" * 64) + "\\n"
+                + "size 1000000\\n", encoding="utf-8",
+            )
+            run_git(root, "add", "README.md")
+            run_git(
+                root, "-c", "user.name=Test", "-c", "user.email=test@example.invalid",
+                "commit", "-m", "fixture",
+            )
+            report = scan(root, max_bytes=10000)
+            self.assertFalse(report["is_complete"])
+            self.assertEqual(report["skipped_lfs_pointer"], ["README.md"])
+
+
 if __name__ == "__main__":
     unittest.main()
