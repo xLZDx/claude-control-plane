@@ -1,0 +1,29 @@
+name: English inventory unit tests
+
+on:
+  pull_request:
+    paths:
+      - "tools/audit_tracked_language.py"
+      - "tests/test_language_inventory.py"
+      - ".github/workflows/english-language-inventory-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: Read-only Git language inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out proposed commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run synthetic read-only tests
+        run: python -m unittest discover -s tests -p 'test_language_inventory.py' -v
