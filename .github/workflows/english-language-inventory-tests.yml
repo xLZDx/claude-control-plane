@@ -1,0 +1,64 @@
+name: English inventory unit tests
+
+on:
+  pull_request:
+    paths:
+      - "tools/audit_tracked_language.py"
+      - "tests/test_language_inventory.py"
+      - "docs/EXISTING_ENGLISH_COUNTERPARTS_2026_10_10.md"
+      - "docs/PERSONAL_DC_MAIN_LANGUAGE_AUDIT_2026_10_10.md"
+      - "docs/PERSONAL_DC_V22_FEATURE_LANGUAGE_AUDIT_2026_10_10.md"
+      - ".github/workflows/english-language-inventory-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: Read-only Git language inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out proposed commit
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run synthetic read-only tests
+        run: python -m unittest discover -s tests -p 'test_language_inventory.py' -v
+      - name: Audit committed text in this repository only
+        shell: bash
+        run: |
+          set +e
+          python tools/audit_tracked_language.py . --output "$RUNNER_TEMP/language-inventory.json"
+          status=$?
+          set -e
+          if [ ! -f "$RUNNER_TEMP/language-inventory.json" ]; then
+            echo "The inventory did not produce a report."
+            exit 1
+          fi
+          python - "$RUNNER_TEMP/language-inventory.json" <<'PY'
+          import json
+          import sys
+          with open(sys.argv[1], encoding="utf-8") as handle:
+              report = json.load(handle)
+          for item in report["reports"]:
+              print("Scan HEAD:", item.get("head", "NOT_AVAILABLE"))
+              print("Recognized text blobs scanned:", item.get("text_files_scanned", 0))
+              print("Blobs with Cyrillic:", item.get("match_count", 0))
+              for match in item.get("matches", []):
+                  print("Cyrillic path:", match["path"], "classification:", match["classification"])
+              print("Complete for recognized file types:", item.get("is_complete", False))
+              print("Excluded large/LFS/undecodable files:", sum(
+                  len(item.get(key, [])) for key in
+                  ("skipped_too_large", "skipped_lfs_pointer", "skipped_non_utf8_or_binary")
+              ))
+          PY
+          echo "Inventory exit code: $status (0 complete; 2 incomplete)"
+          if [ "$status" -ne 0 ] && [ "$status" -ne 2 ]; then
+            exit "$status"
+          fi
