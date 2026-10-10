@@ -76,6 +76,10 @@ All proposed replacement content was checked for Cyrillic before submission. Tra
 
 [Exact SHA audit for all 57 historic report source pairs](translation_targets/PM_Bridge_HISTORICAL_REPORT_LANGUAGE_AUDIT_2026-10-10.md): **57/57** English HTML reports fetched; **50** with zero Cyrillic, **seven** preserving owner/approval language (383 characters). [PM Bridge Draft PR #1](https://github.com/xLZDx/PM_Bridge/pull/1) contains the 57-report English index with working alternatives for two archived Gate P evidence references, README navigation, and two English Markdown historical companions. **120** local links resolved, zero missing; originals untouched. **Historical Russian-named report cohort 57/57 English-covered**, independent semantic review and all-branch migration pending.
 
+## db_test_tool_clean — All Eleven Existing English Historical Reports
+
+[Exact Git blob audit](translation_targets/db_test_tool_clean_HISTORICAL_ENGLISH_AUDIT_2026-10-10.md): the known eleven Russian-named historical report files each have English HTML siblings, and **all 11 contents were fetched and contained zero Cyrillic**. [db_test_tool_clean Draft PR #1](https://github.com/xLZDx/db_test_tool_clean/pull/1) now adds a source-linked English report index and a README link: **28 local Markdown links tested, zero missing**. No original report or code was modified. **Known cohort 11/11 English-covered**, while all other source/branch and independent reviewer checks remain open.
+
 ## Additional Exact-HEAD Cohorts and Translation Slices — October 10
 
 ### Three fully scanned default-tree Markdown/TXT cohorts
