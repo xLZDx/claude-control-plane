@@ -54,6 +54,7 @@ are the author's real Windows paths; adapt them to your machine.
 - [34-repository inventory and status](docs/OWNER_WIDE_ENGLISH_MIGRATION_2026_10_10.md)
 - [Corrected counterpart audit: 426 already paired, 14 translated in draft](docs/EXISTING_ENGLISH_COUNTERPARTS_2026_10_10.md)
 - [Personal_DC main: all 35 tracked files inspected](docs/PERSONAL_DC_MAIN_LANGUAGE_AUDIT_2026_10_10.md)
+- [Personal_DC v2.2 feature: 184 tracked files inspected, 4 protected data/quote exceptions](docs/PERSONAL_DC_V22_FEATURE_LANGUAGE_AUDIT_2026_10_10.md)
 - [Current issue and PR description audit](docs/ACTIVE_GITHUB_DISCUSSIONS_LANGUAGE_AUDIT_2026_10_10.md)
 - [Global mirror and hook language exceptions](docs/GLOBAL_MIRROR_CYRILLIC_PRESERVATION_2026_10_10.md)
 - [Read-only Git HEAD scanner](tools/audit_tracked_language.py) and [synthetic tests](tests/test_language_inventory.py)
