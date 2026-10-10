@@ -53,6 +53,13 @@ Default-branch inventory: `main` / Git tree `2708b3d4dfc8dbd3eb72a2168da65a13e47
 | `reports/gate_ui1_ui_prototype_closure_2026-09-28.ru.html` | `07689f2b4c2f116a4943eb480cf3c67d3f66fdf6` |
 | `reports/zero-stop-integration-status-2026-09-25.ru.html` | `de6e822cb33b9e3b53f7e7b4b9e827f9e1666bfa` |
 
+## Additional Historical English Review Companion — October 10, 2026
+
+- [PDCC draft PR #146](https://github.com/xLZDx/Personal_Decision_Command_Center/pull/146), updated exact HEAD `f19c3ab94e150d872d2d59646e9302796bd3dd26`, has **10 documentation-only changed Markdown files**, including the new [v0.2 adversarial review English companion](https://github.com/xLZDx/Personal_Decision_Command_Center/blob/docs/english-handoff-20261010/governance/reviews/02-tdd-v0.2-adversarial-review.en.md).
+- The original `governance/reviews/02-tdd-v0.2-adversarial-review.md` remains immutable at blob SHA `53e3bc247169544890ff9497cb4e5861222eaa79`. Its September 10, 2026 **BLOCK / NO-GO for v0.2** with NB1 and NM2–NM4 is preserved, along with the earlier finding matrix, seven minor/INFO items, security/queue/AI policy caveats and conditional v0.3 proposal.
+- Direct GitHub re-fetch found zero Cyrillic in the new companion, a resolving original source link, no duplicate inline Markdown delimiters, and **17 numbered sections**. No current TDD, implementation, testing, release verdict or source-policy precedence was changed.
+- The translated review says plainly that the ten role passes were **one reviewer in one context**, **not independent agents**, and that later canonical PDCC Telegram AI eligibility decisions can supersede the original v0.2 policy. Independent semantic review and current project acceptance remain open.
+
 ## Safety and acceptance
 
 Retain immutable historical reviews and evidence. When they cannot be rewritten, create a linked English companion and disclose provenance. Preserve identifiers, literal contract values, commands and test fixtures. Review/render/validate translated files on exact commit HEAD.
