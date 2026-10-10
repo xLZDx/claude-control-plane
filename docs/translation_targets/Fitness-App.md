@@ -115,6 +115,10 @@ At project Draft PR HEAD `9eb9a3c93c0cdf3fd3b7cee528478b1d44fa0417`, **29 Markdo
 
 **Combined selected distinct-source inventory is now 167 Markdown/prompt files inspected, 121 without Cyrillic and 46 source-language positives** (94 earlier files + 73 disjoint agent-engine/plans files). Fifteen substantive historical English core/plan companions were created in the draft across both rounds (six initial core plus nine plans). This **does not** include the entire Fitness-App repository, non-default branches, app code comments or semantic signoff.
 
+## October 11 — Complete Fitness Agent Engine Directory Language Check
+
+[Agent Engine v2.3.1 exact-SHA report](Fitness_App_AGENT_ENGINE_V231_AUDIT_2026-10-11.md): **30/30** Markdown/TXT documents under `core/agent-engine-v2.3.1/` were directly fetched from Fitness-App draft HEAD `b8320e835c0c29ef5de138b5a289a4c20a43d3e5`, with **zero Cyrillic in all 30**. No English translation or content edits were necessary. This directory is **additional to**, and does not overlap, the previous 94-file selected agent/root/core audit. Language scan coverage is now **124 distinct selected docs**, **103 with zero Cyrillic** and **21 with intentionally preserved or source-translated Russian**; the remaining Fitness-App documentation, code comments and branches are not certified.
+
 ## Guardrails
 
 Preserve historical audit evidence, customer data, external identifiers, API names, and 1C metadata. Translate surrounding explanation without mutating structured records. Do not merge without per-file review and validation.
