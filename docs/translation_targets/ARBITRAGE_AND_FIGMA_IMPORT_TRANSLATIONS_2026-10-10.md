@@ -61,3 +61,17 @@ QA on exact HEAD: **7 Markdown-only changed files**, zero Cyrillic in proposed E
 The file named `FIGMA_FULL_APP_REFACTOR_PROMPT_v1.3.md` begins with an internal `v1.1` heading and ends with a separate `UPDATE v1.3 — Decision Registry`. Its English companion preserves **both version markers**, all 29 numbered master sections and the appended governance contract, including **D1 STOP until review**, 17 historic acceptance criteria, Q19/Q20/Q21/Q23/Q26 hard blockers and the operator's locked Flutter selection (Q39). The original and `-1` duplicate share exact source blob `81538d09cb23d2c6acc8b84b61da5450128ca4cb` and were not altered.
 
 At exact branch HEAD `a872a15690462f6841b84adca69b6ae69411c71c`, the new master English file has zero Cyrillic, **29 numbered sections**, valid original references, and the README links it without broken relative paths. The original brief claimed features such as 1,887 exercises and on-device form detection; those claims remain **unverified design premises**, never current source/runtime proofs.
+
+
+## Structural fidelity cross-check — additional review of four imported sources
+
+At exact `ReviewExistingExamples` draft HEAD `a872a15690462f6841b84adca69b6ae69411c71c`, the original and English counterpart blobs were individually re-fetched and compared for explicit scope markers:
+
+| Imported source | Measured English coverage | Key negative-gate preservation |
+| --- | --- | --- |
+| Figma master refactor v1.1 + appended v1.3 | **29/29** numbered master sections; appended v1.3 decision update present | D1 STOP/required review and all **17** DoD criteria retained |
+| Open Decisions Register v1.3 | **44/44** Q1–Q44 identifiers present in English | Hard blockers, provisional status and locked Flutter Q39 retained |
+| Progress Photo Comparison | **20** numbered English sections, matching 20 original requirements | Explicit share preview, private photo use, no body score/medical claim |
+| Technique Coach v1.2 | **27** numbered English sections | Open product decisions, low-confidence/pose loss, privacy constraints, complete DoD |
+
+All associated original Git blob SHAs remained unchanged. These are **structural coverage checks**, not a word-by-word certified translation, UI rendering, independently executed product test or current Flutter feature validation.
