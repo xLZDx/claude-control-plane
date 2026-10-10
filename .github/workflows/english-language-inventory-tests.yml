@@ -47,6 +47,8 @@ jobs:
               print("Scan HEAD:", item.get("head", "NOT_AVAILABLE"))
               print("Recognized text blobs scanned:", item.get("text_files_scanned", 0))
               print("Blobs with Cyrillic:", item.get("match_count", 0))
+              for match in item.get("matches", []):
+                  print("Cyrillic path:", match["path"], "classification:", match["classification"])
               print("Complete for recognized file types:", item.get("is_complete", False))
               print("Excluded large/LFS/undecodable files:", sum(
                   len(item.get(key, [])) for key in
