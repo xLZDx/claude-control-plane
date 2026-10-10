@@ -123,6 +123,12 @@ All other inspected repositories had zero **filename-pattern matches**; this doe
 
 Previous 88-report / 15-original-redesign-blob English coverage remains separately recorded. This **does not certify all 335 Markdown/TXT files on the current Fitness-App draft tree**, its approximately 4.1 MB immutable decision log, active Dart source comments, non-default branches or historical GitHub discussions. Original user-facing Russian strings and owner approval tokens were preserved, no Flutter/Firebase/user data changed, and independent semantic/merge review remains pending.
 
+## October 11 — Fitness-App Complete Agent-Engine and Plans Folders
+
+[73-file exact-SHA source audit](translation_targets/Fitness_App_AGENT_ENGINE_AND_PLANS_AUDIT_2026-10-11.md): all **30** `core/agent-engine-v2.3.1` Markdown/TXT files are already English, and all **43** `core/plans` Markdown/TXT files were inspected (**18** Cyrillic-free; **25** source-language), with **nine new English companions** for all nine substantially Russian plan narratives. The other sixteen Cyrillic-positive plans contain exact owner statements, UI copy or historical evidence requiring preservation. [Fitness-App Draft PR #1](https://github.com/xLZDx/Fitness-App/pull/1) at `9eb9a3c93c0cdf3fd3b7cee528478b1d44fa0417` now has **29 Markdown-only file changes** and a complete [43-plan English index](https://github.com/xLZDx/Fitness-App/blob/docs/add-english-readme-20261010/core/plans/ENGLISH_TRANSLATION_INDEX.md).
+
+Together with [earlier 94-file active cohort](translation_targets/Fitness_App_ACTIVE_TEXT_AUDIT_2026-10-11.md), **167 distinct source text paths** have been inspected (**121** without literal Cyrillic and **46** with source-bound Cyrillic); six earlier core + nine new plan English companions proposed, all source blobs intact. Full repository source-comment/branch/history and semantic/merge checks still pending.
+
 ## Required continuation order
 
 1. Review and merge the eleven draft PRs currently open for English README changes. Do not merge without checking exact HEAD, build links, and repository review rules.
