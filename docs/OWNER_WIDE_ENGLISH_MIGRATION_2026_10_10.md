@@ -68,6 +68,10 @@ All proposed replacement content was checked for Cyrillic before submission. Tra
 
 [All six original/English report pairs](translation_targets/ERP_MCP_HISTORICAL_REPORT_AUDIT_2026-10-10.md) were read at exact ERP_MCP draft tree HEAD `8d17448cf2788f48a2b3f26eb70800cefed4d992`. **Six of six English `.html` files exist, four have zero Cyrillic, two detailed real-1C reports carry native-language evidence** (23 / 39,178 Cyrillic characters). Relative real-1C cross-links resolve. Together with the **13** Markdown docs translated in [draft ERP_MCP #38](https://github.com/xLZDx/ERP_MCP/pull/38), the selected Russian-named 19-document cohort now has **19/19 English coverage** (draft or pre-existing), **not** proof of source semantic fidelity, literal English-only content or a merged repo. Native 1C business evidence remains preserved.
 
+## TENDER — Verified English Historical Report Coverage
+
+[Complete TENDER 23-report exact-blob audit](translation_targets/TENDER_HISTORICAL_REPORT_LANGUAGE_AUDIT_2026-10-10.md): all **23** English HTML siblings fetched; **20** contain zero Cyrillic; **three** retain source-attributed operator language. [TENDER Draft PR #1](https://github.com/xLZDx/TENDER/pull/1) adds a complete English navigation index and correct alternative links for **nine archived broken relative references** in G1.6 HTML, plus three source-linked English Markdown historical companions. The two indexes contain **64 verified local links, zero unresolved**. Known Russian-named TENDER historic report cohort **23/23 covered**, semantic signoff and other branches still pending.
+
 ## Additional Exact-HEAD Cohorts and Translation Slices — October 10
 
 ### Three fully scanned default-tree Markdown/TXT cohorts
