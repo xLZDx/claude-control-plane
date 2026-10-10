@@ -119,6 +119,10 @@ At project Draft PR HEAD `9eb9a3c93c0cdf3fd3b7cee528478b1d44fa0417`, **29 Markdo
 
 [Agent Engine v2.3.1 exact-SHA report](Fitness_App_AGENT_ENGINE_V231_AUDIT_2026-10-11.md): **30/30** Markdown/TXT documents under `core/agent-engine-v2.3.1/` were directly fetched from Fitness-App draft HEAD `b8320e835c0c29ef5de138b5a289a4c20a43d3e5`, with **zero Cyrillic in all 30**. No English translation or content edits were necessary. This directory is **additional to**, and does not overlap, the previous 94-file selected agent/root/core audit. Language scan coverage is now **124 distinct selected docs**, **103 with zero Cyrillic** and **21 with intentionally preserved or source-translated Russian**; the remaining Fitness-App documentation, code comments and branches are not certified.
 
+## October 11 — Fitness Business Strategy Document QA
+
+[Complete five-file `core/business/` language QA](Fitness_App_BUSINESS_DOCS_AUDIT_2026-10-11.md): all **5/5** existing business Markdown files directly fetched at Fitness draft HEAD `b8320e835c0c29ef5de138b5a289a4c20a43d3e5` and contained **zero literal Cyrillic**. No duplicate translation needed. With the previous disjoint 94-file selected audit and 30-file Agent Engine audit, the running **distinct Fitness Markdown/prompt coverage is 129 files: 108 zero-Cyrillic, 21 source-language exceptions**. Business/funding assertions have not been fact-checked, and wider source/branch migration is still open.
+
 ## Guardrails
 
 Preserve historical audit evidence, customer data, external identifiers, API names, and 1C metadata. Translate surrounding explanation without mutating structured records. Do not merge without per-file review and validation.
