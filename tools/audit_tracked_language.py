@@ -138,6 +138,12 @@ def scan(repo: Path, max_bytes: int) -> dict[str, object]:
             if process.poll() is None:
                 process.kill()
                 process.wait()
+            # Closing the process does not automatically close retained pipe
+            # handles when Popen is not used as a context manager.
+            if process.stdin is not None and not process.stdin.closed:
+                process.stdin.close()
+            if process.stdout is not None:
+                process.stdout.close()
 
     results.sort(key=lambda item: str(item["path"]))
     return {
