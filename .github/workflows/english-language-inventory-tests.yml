@@ -5,6 +5,8 @@ on:
     paths:
       - "tools/audit_tracked_language.py"
       - "tests/test_language_inventory.py"
+      - "docs/EXISTING_ENGLISH_COUNTERPARTS_2026_10_10.md"
+      - "docs/PERSONAL_DC_MAIN_LANGUAGE_AUDIT_2026_10_10.md"
       - ".github/workflows/english-language-inventory-tests.yml"
   workflow_dispatch:
 
