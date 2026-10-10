@@ -77,4 +77,12 @@ Keep API identifiers, structured content, tests, historical decisions and financ
 | [`reports/push-governance-2026-08-19.ru.html`](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/reports/push-governance-2026-08-19.ru.html) | [`reports/push-governance-2026-08-19.en.md`](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/reports/push-governance-2026-08-19.en.md) |
 | [`reports/test-001-ready.ru.html`](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/reports/test-001-ready.ru.html) | [`reports/test-001-ready.en.md`](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/reports/test-001-ready.en.md) |
 
-**Gate:** HISTORICAL COMPANION COVERAGE 23/23, DOCUMENTATION DRAFT, **NOT RELEASE APPROVAL OR OWNER-WIDE MIGRATION COMPLETION**.
+## Additional Current-Document Translation and Audit — October 10, 2026
+
+- [Active documentation/agent-language audit](Virtual_marketing_company_ACTIVE_DOC_AUDIT_2026-10-10.md): **69 selected active text documents** inspected against exact source HEAD `98e2cfc9910f0aab07bed99f7e1c4d41ed7dd109`. **48 without Cyrillic, 21 with source-sensitive/native-language examples**; each of the 21 classified with original blob SHA.
+- [English SPTR product/source companion](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/products/sptr/product.en.md) translates capability ids and first-value evidence rules but **does not replace source `products/sptr/product.md` or approve English marketing**.
+- [English first-live-test playbook](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/docs/04_LIVE_VALIDATION_PLAYBOOK.en.md) provides an explanation of the original language-dependent staff/participant procedures. Actual founder consent and outreach scripts remain unchanged.
+- Current VMC doc PR HEAD `b45bc052663b813a0e434e72fac68683625d25f9`: **29 Markdown files**, 23 historical report companions plus the two new source-bound guides, root README, index and two founder/discovery guides. Confirmed no non-Markdown changes; new source-blob SHAs, local links, Cyrillic absence and fenced-block consistency validated.
+- No end-user localization, English campaign activation, founder approval, live account mutation or independent external-agent review is claimed.
+
+**Gate:** HISTORICAL COMPANION COVERAGE 23/23, ACTIVE DOC COHORT AUDITED 69/69, LANGUAGE MIGRATION DRAFT — **NOT RELEASE APPROVAL OR OWNER-WIDE MIGRATION COMPLETION**.
