@@ -22,6 +22,12 @@ A read-only scan of the default-branch Git tree was performed for each accessibl
 | Initial Russian-language README translations opened as draft PRs | 3 |
 | Tracked files with obviously Russian-named paths on inspected default branches | **452** (filename signal only, not a content audit) |
 
+## Corrected English Companion Coverage (Later Audit)
+
+**Correction to the initial path-only pending list:** Of the **440 document-like** filenames ending in `.ru.html` or `_RU.md`, **426 already had a conventional English sibling file on the inspected default branch**. Only **14** lacked a separate English sibling: 13 in ERP_MCP and one in PDCC. All fourteen were translated **in place in draft PRs**, without renaming their original paths. Ten actual English siblings were fetched across the ten repos and all ten contained zero Cyrillic.
+
+**Do not infer that 426 translations have been individually verified.** This is an **existence** audit plus a ten-file content sample, not a complete language or semantic review. See the exact SHA tables and outstanding work in [Existing English Counterparts](EXISTING_ENGLISH_COUNTERPARTS_2026_10_10.md). The 452 filename markers below also include twelve non-document Fitness-App locale/data/media files; they are not automatically translation targets.
+
 ## Missing README closure
 
 Eight existing projects now have proposed English root READMEs (draft PR, not merged):
@@ -44,7 +50,7 @@ No source or deployment code was changed in these README-only operations. Empty 
 
 ## Translation work submitted for review
 
-- [ERP_MCP #38](https://github.com/xLZDx/ERP_MCP/pull/38) — English root README, Phase 2 README, Release 1 Lessons Learned, and Step-by-Step Installation Guide (four documents). The `_RU.md` filenames are retained until link migration is approved.
+- [ERP_MCP #38](https://github.com/xLZDx/ERP_MCP/pull/38) — fifteen English documents, including all thirteen previously unpaired `_RU.md` guides plus the root README and Phase 2 overview. Existing filenames remain stable until a separate reviewed link migration.
 - [AEVE #1](https://github.com/xLZDx/AEVE/pull/1) — English root README with preserved registry-only G0 status.
 - [Virtual_marketing_company #1](https://github.com/xLZDx/Virtual_marketing_company/pull/1) — extended English root README covering authorization, privacy, GUI, operational stages and historical milestone evidence.
 
