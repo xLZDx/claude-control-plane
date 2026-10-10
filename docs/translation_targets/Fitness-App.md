@@ -107,6 +107,14 @@ Previous [Fitness-App 88 historical report/15 redesign-source audit](Fitness_App
 
 The original historical STOP, privacy, user data and push/GO statements remain intact. These translations are **not** current release or independent semantic approval; the PR remains draft.
 
+## Complete Agent-Engine and Core Plans Cohorts — October 11
+
+[Exact-SHA two-folder audit](Fitness_App_AGENT_ENGINE_AND_PLANS_AUDIT_2026-10-11.md): **30/30** agent-engine Markdown files already English; **43/43** `core/plans` source files inspected (18 with zero Cyrillic and 25 with original-language content). Nine substantially Russian plan documents (B1, B3, B5, B5b, O0, R11 decision plan, R11 remainder, O-series resume, August 13 bug plan) now have separate source-linked English companions; the other 16 Cyrillic-bearing plan files contain preserved operator quotes/locale/authorization references, each classified by SHA.
+
+At project Draft PR HEAD `9eb9a3c93c0cdf3fd3b7cee528478b1d44fa0417`, **29 Markdown-only changes**; nine new English files re-fetched and verified zero Cyrillic, unchanged original source SHA, zero missing local paths and balanced code fences. [43-plan English index](https://github.com/xLZDx/Fitness-App/blob/docs/add-english-readme-20261010/core/plans/ENGLISH_TRANSLATION_INDEX.md) has 34 checked local links; [core/INDEX.md](https://github.com/xLZDx/Fitness-App/blob/docs/add-english-readme-20261010/core/INDEX.md) 39. Both have zero broken links. No source/runtime changes.
+
+**Combined selected distinct-source inventory is now 167 Markdown/prompt files inspected, 121 without Cyrillic and 46 source-language positives** (94 earlier files + 73 disjoint agent-engine/plans files). Fifteen substantive historical English core/plan companions were created in the draft across both rounds (six initial core plus nine plans). This **does not** include the entire Fitness-App repository, non-default branches, app code comments or semantic signoff.
+
 ## Guardrails
 
 Preserve historical audit evidence, customer data, external identifiers, API names, and 1C metadata. Translate surrounding explanation without mutating structured records. Do not merge without per-file review and validation.
