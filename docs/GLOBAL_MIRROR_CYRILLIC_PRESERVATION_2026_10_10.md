@@ -14,14 +14,14 @@ The read-only Git-blob scanner inspected **186 recognized text blobs** in the ex
 
 | Source in mirror | Classification | Safe next action |
 | --- | --- | --- |
-| `mirror/CLAUDE.md` | Live global operating contract; includes literal operator `ГО` and historical text | Review upstream canonical `~/.claude/CLAUDE.md`; translate prose only in a **separately approved change**, preserve accepted authorization tokens and test gate behavior |
-| `mirror/commands/pm-bridge-mode.md` | Active operator slash command with literal `GO / ГО` | Preserve command inputs; use English surrounding explanation |
+| `mirror/CLAUDE.md` | Live global operating contract; includes literal operator `U+0413 U+041E` and historical text | Review upstream canonical `~/.claude/CLAUDE.md`; translate prose only in a **separately approved change**, preserve accepted authorization tokens and test gate behavior |
+| `mirror/commands/pm-bridge-mode.md` | Active operator slash command with literal `GO / U+0413 U+041E` | Preserve command inputs; use English surrounding explanation |
 | `mirror/core/DECISION_LOG.md` | Immutable historical governance quotations and recorded decision evidence | Preserve exact original quotes; add source-linked English companion explanations rather than rewriting decisions |
 | `mirror/hooks/_report_common.py` | Hook source with Cyrillic strings/comments; exact role not yet independently inspected | Identify all programmatic vs explanatory occurrences and test before any upstream edit |
 | `mirror/hooks/ask_routing_gate.py` | Hook source; possible multilingual invocation logic | Classify literal triggers and tests, not blanket translation |
 | `mirror/hooks/codex_review_gate.py` | Hook source; potential approval/review parsing | Preserve original trust boundaries; independently test any English-comment-only change |
 | `mirror/hooks/dangerous_command_gate.py` | Safety-critical command guard | Treat Cyrillic command input and adversarial fixtures as behavioral data |
-| `mirror/hooks/go_gate.py` | **Critical authorization gate**; contains actual `ГО` logic and historical operator quotes | **Never translate runtime literals or approved quotes in place**; requires threat review and regression on the real upstream hook |
+| `mirror/hooks/go_gate.py` | **Critical authorization gate**; contains actual `U+0413 U+041E` logic and historical operator quotes | **Never translate runtime literals or approved quotes in place**; requires threat review and regression on the real upstream hook |
 | `mirror/hooks/gpt_review_gate.py` | Independent review/approval guard | Verify parser and signature semantics before altering strings |
 | `mirror/hooks/plan_approval_gate.py` | Plan authorization guard | Protect operator input tokens and review receipts |
 | `mirror/hooks/pm_bridge_stop_gate.py` | Emergency/STOP behavior | Retain recognized commands and negative test cases; no behavioral change without approval |
@@ -39,13 +39,13 @@ The read-only Git-blob scanner inspected **186 recognized text blobs** in the ex
 
 1. Inspect the actual upstream `~/.claude` sources, exporter allowlist, current SHA and dirty state. The mirror's source-of-truth may be a different worktree; do not overwrite it from this documentation PR.
 2. Determine **which occurrences are programmatic data, quotes, fixtures, or prose**. Only the last class is a routine translation target.
-3. For live governance/hooks, create semantic-diff tests showing unchanged acceptance/rejection of both English `GO` and Cyrillic `ГО`, including spoofing, stale receipts, unapproved plans, STOP and negative access cases.
+3. For live governance/hooks, create semantic-diff tests showing unchanged acceptance/rejection of both English `GO` and Cyrillic `U+0413 U+041E`, including spoofing, stale receipts, unapproved plans, STOP and negative access cases.
 4. Translate prose in the **canonical upstream source**, not just the exported mirror. Re-export through `scripts/export_from_claude_home.py` using its fail-closed secret scan and review the full resulting diff.
 5. Capture exact HEAD, test/CI evidence and authorized review. Historic decision quotes stay byte-exact, with an English companion where useful.
 6. If source access or tests are refused, record `BLOCKED`; do not use another tool to evade the policy.
 
 ## Why the Findings Are Not Automatically Violations
 
-English-only **authoring** rules govern newly written descriptions, documentation and comments. An essential original language token such as the literal command `ГО`, a signed decision quotation, or an internationalization/negative-test fixture is **structured source data**, not an untranslated author comment. Erasing it would reduce functionality or falsify evidence.
+English-only **authoring** rules govern newly written descriptions, documentation and comments. An essential original language token such as the literal command `U+0413 U+041E`, a signed decision quotation, or an internationalization/negative-test fixture is **structured source data**, not an untranslated author comment. Erasing it would reduce functionality or falsify evidence.
 
 **Disposition:** `20 DETECTED / 20 CLASSIFIED FOR CONTROLLED REVIEW / 0 MIRROR FILES ALTERED`. This is a classification plan, **not** proof that all comment text in the mirror is already English.
