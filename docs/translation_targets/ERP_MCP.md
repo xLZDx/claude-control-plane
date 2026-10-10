@@ -28,6 +28,13 @@ Inspected default branch: `main`; Git tree SHA: `cac886dcfb0d749892c60dc78902dea
 | `reports/real1c/REAL_1C_818HA_L2_REPORT.ru.html` | `c4ecbce2dd124d91b22a88c5bbe6a7015fe109f4` |
 | `reports/real1c/REAL_1C_818HA_L2_TEST_DETAILS.ru.html` | `fb3ac510d507be2513ea07261f3ada8b91e18034` |
 
+## English Draft Validation — October 10, 2026
+
+- [ERP_MCP draft PR #38](https://github.com/xLZDx/ERP_MCP/pull/38), exact draft HEAD `8d17448cf2788f48a2b3f26eb70800cefed4d992`, contains 15 translated Markdown documents.
+- All 15 were directly re-fetched from GitHub and checked: zero Cyrillic, **74 relative link targets resolved**, no unbalanced triple-backtick fences (**58 delimiter lines**). See [exact-head QA table](ERP_MCP_DOCS_QA_2026-10-10.md) for every original path/blob SHA.
+- `_RU.md` filenames were kept to avoid link breakage, despite draft English contents. This is a compatibility compromise, **not** bilingual source parity.
+- Semantic review, Markdown anchor rendering, command correctness on actual 1C hosts and branch merge remain pending. **Do not infer Phase 2 production readiness, a new native 1C test, IAM approvals or a release GO.**
+
 ## Constraints
 
 Keep API identifiers, structured content, tests, historical decisions and financial/private source values unchanged. Do not silently translate real 1C metadata identifiers. Translate immutable reviews into separate English companion records with attribution where needed.
