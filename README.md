@@ -48,6 +48,19 @@ deleted from the mirror.
 backups, and any project repository content. Paths such as `C:\Users\<name>` inside the mirrored files
 are the author's real Windows paths; adapt them to your machine.
 
+## English-only GitHub migration
+
+- [English authoring and preservation policy](docs/GITHUB_ENGLISH_AUTHORING_POLICY.md)
+- [34-repository inventory and status](docs/OWNER_WIDE_ENGLISH_MIGRATION_2026_10_10.md)
+- [Corrected counterpart audit: 426 already paired, 14 translated in draft](docs/EXISTING_ENGLISH_COUNTERPARTS_2026_10_10.md)
+- [Personal_DC main: all 35 tracked files inspected](docs/PERSONAL_DC_MAIN_LANGUAGE_AUDIT_2026_10_10.md)
+- [Personal_DC v2.2 feature: 184 tracked files inspected, 4 protected data/quote exceptions](docs/PERSONAL_DC_V22_FEATURE_LANGUAGE_AUDIT_2026_10_10.md)
+- [Current issue and PR description audit](docs/ACTIVE_GITHUB_DISCUSSIONS_LANGUAGE_AUDIT_2026_10_10.md)
+- [Global mirror and hook language exceptions](docs/GLOBAL_MIRROR_CYRILLIC_PRESERVATION_2026_10_10.md)
+- [Read-only Git HEAD scanner](tools/audit_tracked_language.py) and [synthetic tests](tests/test_language_inventory.py)
+
+**Do not edit `mirror/` just to remove Cyrillic.** It includes active GO/permission parsing, operator quotations and exported source files. Review and translate the upstream canonical files first; preserve literal authorization tokens and regenerate the mirror under its secret-scan rules.
+
 ## Status
 
 Personal configuration shared as reference, not a supported product. No warranty. See `LICENSE`.
