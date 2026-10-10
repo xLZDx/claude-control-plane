@@ -27,3 +27,33 @@ jobs:
           python-version: "3.12"
       - name: Run synthetic read-only tests
         run: python -m unittest discover -s tests -p 'test_language_inventory.py' -v
+      - name: Audit committed text in this repository only
+        shell: bash
+        run: |
+          set +e
+          python tools/audit_tracked_language.py . --output "$RUNNER_TEMP/language-inventory.json"
+          status=$?
+          set -e
+          if [ ! -f "$RUNNER_TEMP/language-inventory.json" ]; then
+            echo "The inventory did not produce a report."
+            exit 1
+          fi
+          python - "$RUNNER_TEMP/language-inventory.json" <<'PY'
+          import json
+          import sys
+          with open(sys.argv[1], encoding="utf-8") as handle:
+              report = json.load(handle)
+          for item in report["reports"]:
+              print("Scan HEAD:", item.get("head", "NOT_AVAILABLE"))
+              print("Recognized text blobs scanned:", item.get("text_files_scanned", 0))
+              print("Blobs with Cyrillic:", item.get("match_count", 0))
+              print("Complete for recognized file types:", item.get("is_complete", False))
+              print("Excluded large/LFS/undecodable files:", sum(
+                  len(item.get(key, [])) for key in
+                  ("skipped_too_large", "skipped_lfs_pointer", "skipped_non_utf8_or_binary")
+              ))
+          PY
+          echo "Inventory exit code: $status (0 complete; 2 incomplete)"
+          if [ "$status" -ne 0 ] && [ "$status" -ne 2 ]; then
+            exit "$status"
+          fi
