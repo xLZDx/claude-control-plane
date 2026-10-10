@@ -20,12 +20,19 @@ TEXT_SUFFIXES = frozenset({
     ".py", ".pyi", ".js", ".jsx", ".ts", ".tsx", ".dart",
     ".ps1", ".psm1", ".sh", ".bash", ".bat", ".cmd", ".sql",
     ".yml", ".yaml", ".json", ".jsonl", ".toml", ".xml", ".arb",
-    ".css", ".scss", ".vue", ".feature", ".ini", ".cfg", ".properties",
+    ".css", ".scss", ".vue", ".svelte", ".astro", ".feature",
+    ".java", ".kt", ".kts", ".swift", ".cs", ".go", ".rs", ".rb", ".php",
+    ".c", ".h", ".cc", ".cpp", ".hpp", ".scala", ".lua", ".r", ".rmd",
+    ".graphql", ".gql", ".proto", ".gradle", ".tf", ".hcl", ".tex",
+    ".ini", ".cfg", ".properties",
 })
 DOC_SUFFIXES = frozenset({".md", ".mdx", ".markdown", ".rst", ".txt", ".html", ".htm"})
 CODE_SUFFIXES = frozenset({
     ".py", ".pyi", ".js", ".jsx", ".ts", ".tsx", ".dart", ".ps1",
     ".psm1", ".sh", ".bash", ".bat", ".cmd", ".sql", ".css", ".scss", ".vue",
+    ".svelte", ".astro", ".java", ".kt", ".kts", ".swift", ".cs",
+    ".go", ".rs", ".rb", ".php", ".c", ".h", ".cc", ".cpp", ".hpp",
+    ".scala", ".lua", ".r", ".graphql", ".gql", ".proto", ".gradle", ".tf", ".hcl",
 })
 
 
@@ -57,6 +64,17 @@ def classify(path: str) -> str:
     return "STRUCTURED_CONTENT_REVIEW"
 
 
+EXTENSIONLESS_TEXT_NAMES = frozenset({
+    "dockerfile", "makefile", "cmakelists.txt", "justfile", "jenkinsfile",
+    "procfile", "license", "notice", ".gitignore", ".gitattributes",
+})
+
+
+def is_candidate_text_path(path: str) -> bool:
+    filename = Path(path).name.lower()
+    return filename in EXTENSIONLESS_TEXT_NAMES or Path(filename).suffix in TEXT_SUFFIXES
+
+
 def decode_text(data: bytes) -> str | None:
     if b"\x00" in data[:4096] and not data.startswith((b"\xff\xfe", b"\xfe\xff")):
         return None
@@ -81,7 +99,7 @@ def scan(repo: Path, max_bytes: int) -> dict[str, object]:
         if len(fields) != 4 or fields[1] != b"blob":
             continue
         path = raw_path.decode("utf-8", errors="replace")
-        if Path(path).suffix.lower() not in TEXT_SUFFIXES:
+        if not is_candidate_text_path(path):
             continue
         if fields[3] == b"-":
             continue
@@ -150,6 +168,11 @@ def scan(repo: Path, max_bytes: int) -> dict[str, object]:
         "repository": repo.name,
         "head": head,
         "text_files_scanned": len(candidates),
+        "scan_scope": (
+            "Recognized text extensions and selected extensionless text files "
+            "at the pinned Git HEAD only; arbitrary or unknown file types "
+            "remain outside this scan."
+        ),
         "matches": results,
         "match_count": len(results),
         "skipped_too_large": sorted(skipped_large),
