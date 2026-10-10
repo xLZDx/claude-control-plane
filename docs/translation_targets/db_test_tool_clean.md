@@ -17,3 +17,12 @@ Default-branch tree: `184e528f00921feee36b33695b72b87263525bff`. Pending transla
 | `db-testing-tool/reports/2026-09-02_roadmap_and_remaining.ru.html` | `dbc1a9e8fadeef6eeed83d90bbfaea35e0a07aee` |
 
 Paths are not a complete Cyrillic-content inventory. Keep database names, SQL identifiers, raw samples and original evidence immutable. Create reviewed English versions without deleting the original history.
+
+## Exact-Content Audit — Eleven Historical English HTML Reports
+
+[Complete 11-pair original/English blob audit](db_test_tool_clean_HISTORICAL_ENGLISH_AUDIT_2026-10-10.md): all **11/11** originally Russian-named historic report paths have English `.html` equivalents, and all eleven English HTML blobs were fetched and contain zero Cyrillic. Existing originals and English HTML are unchanged.
+
+[db_test_tool_clean Draft PR #1](https://github.com/xLZDx/db_test_tool_clean/pull/1) at `e40771a72a6504343eb2d00812d76d762a23c6b0` contains a new [English report index](https://github.com/xLZDx/db_test_tool_clean/blob/docs/add-english-readme-20261010/db-testing-tool/reports/ENGLISH_HISTORICAL_REPORTS_INDEX.md) and a root README link. The two modified Markdown files have **28 valid local links**, zero Cyrillic and no executable changes. Full semantic/source-code/LFS/branch audit and merge remain open.
+
+**Selected known historic report cohort: 11/11 English-covered; 0 missing.**
+
