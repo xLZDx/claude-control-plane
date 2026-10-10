@@ -32,6 +32,14 @@ Inspected default branch: `main`; Git tree SHA: `90cd8864e380654f215424655aa607e
 | `reports/G_PROC_MUTATION_1_2026-09-10.ru.html` | `84a95fb91fa0c2f0d9063427091f98cd50d4cbbd` |
 | `reports/G_UNIFY_0_KICKOFF_2026-09-02.ru.html` | `50f8c5c33a7996426a115cc315e8263c1b0e013b` |
 
+## Exact-HEAD Verification — All 23 Existing English Reports
+
+[Complete 23-source/English Git blob SHA audit](TENDER_HISTORICAL_REPORT_LANGUAGE_AUDIT_2026-10-10.md): all **23/23** originally Russian-named HTML reports have existing individually fetched English HTML counterparts. **20** contain no literal Cyrillic; **three** preserve original-language operator quotations (251 + 25 + 11 characters). Neither source nor translated HTML is overwritten.
+
+[TENDER Draft PR #1](https://github.com/xLZDx/TENDER/pull/1), exact HEAD `0fea32360a4f25978f1e7b0d442506446ddc5523`, adds a navigable [English report index](https://github.com/xLZDx/TENDER/blob/docs/english-historical-reports-20261010/docs/ENGLISH_HISTORICAL_REPORTS_INDEX.md) and an index entry, preserving three earlier English Markdown companions. **64 local links** in the two project indexes were checked, zero missing. The navigation index supplies working alternatives to **nine broken relative links** in the old G1.6 English HTML; archived originals remain untouched.
+
+**Selected historic report cohort: English coverage 23/23, missing 0.** This does not imply independent translation semantic fidelity, all current code/branch language audited, legal/funding eligibility or merge/governance acceptance.
+
 ## Constraints
 
 Keep API identifiers, structured content, tests, historical decisions and financial/private source values unchanged. Do not silently translate real 1C metadata identifiers. Translate immutable reviews into separate English companion records with attribution where needed.
