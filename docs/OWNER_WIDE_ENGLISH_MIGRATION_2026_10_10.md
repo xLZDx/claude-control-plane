@@ -129,6 +129,10 @@ Previous 88-report / 15-original-redesign-blob English coverage remains separate
 
 Together with [earlier 94-file active cohort](translation_targets/Fitness_App_ACTIVE_TEXT_AUDIT_2026-10-11.md), **167 distinct source text paths** have been inspected (**121** without literal Cyrillic and **46** with source-bound Cyrillic); six earlier core + nine new plan English companions proposed, all source blobs intact. Full repository source-comment/branch/history and semantic/merge checks still pending.
 
+## October 11 — Complete Fitness Agent Engine Directory Language Check
+
+[Agent Engine v2.3.1 exact-SHA report](translation_targets/Fitness_App_AGENT_ENGINE_V231_AUDIT_2026-10-11.md) : **30/30** Markdown/TXT documents under `core/agent-engine-v2.3.1/` were directly fetched from Fitness-App draft HEAD `b8320e835c0c29ef5de138b5a289a4c20a43d3e5`, with **zero Cyrillic in all 30**. No English translation or content edits were necessary. This directory is **additional to**, and does not overlap, the previous 94-file selected agent/root/core audit. Language scan coverage is now **124 distinct selected docs**, **103 with zero Cyrillic** and **21 with intentionally preserved or source-translated Russian**; the remaining Fitness-App documentation, code comments and branches are not certified.
+
 ## Required continuation order
 
 1. Review and merge the eleven draft PRs currently open for English README changes. Do not merge without checking exact HEAD, build links, and repository review rules.
