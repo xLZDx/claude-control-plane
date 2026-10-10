@@ -72,6 +72,10 @@ All proposed replacement content was checked for Cyrillic before submission. Tra
 
 [Complete TENDER 23-report exact-blob audit](translation_targets/TENDER_HISTORICAL_REPORT_LANGUAGE_AUDIT_2026-10-10.md): all **23** English HTML siblings fetched; **20** contain zero Cyrillic; **three** retain source-attributed operator language. [TENDER Draft PR #1](https://github.com/xLZDx/TENDER/pull/1) adds a complete English navigation index and correct alternative links for **nine archived broken relative references** in G1.6 HTML, plus three source-linked English Markdown historical companions. The two indexes contain **64 verified local links, zero unresolved**. Known Russian-named TENDER historic report cohort **23/23 covered**, semantic signoff and other branches still pending.
 
+## PM Bridge — Complete Existing English Report Review
+
+[Exact SHA audit for all 57 historic report source pairs](translation_targets/PM_Bridge_HISTORICAL_REPORT_LANGUAGE_AUDIT_2026-10-10.md): **57/57** English HTML reports fetched; **50** with zero Cyrillic, **seven** preserving owner/approval language (383 characters). [PM Bridge Draft PR #1](https://github.com/xLZDx/PM_Bridge/pull/1) contains the 57-report English index with working alternatives for two archived Gate P evidence references, README navigation, and two English Markdown historical companions. **120** local links resolved, zero missing; originals untouched. **Historical Russian-named report cohort 57/57 English-covered**, independent semantic review and all-branch migration pending.
+
 ## Additional Exact-HEAD Cohorts and Translation Slices — October 10
 
 ### Three fully scanned default-tree Markdown/TXT cohorts
