@@ -35,6 +35,12 @@ Inspected default branch: `main`; Git tree SHA: `cac886dcfb0d749892c60dc78902dea
 - `_RU.md` filenames were kept to avoid link breakage, despite draft English contents. This is a compatibility compromise, **not** bilingual source parity.
 - Semantic review, Markdown anchor rendering, command correctness on actual 1C hosts and branch merge remain pending. **Do not infer Phase 2 production readiness, a new native 1C test, IAM approvals or a release GO.**
 
+## Complete Known Russian-Named Cohort — October 10
+
+[Six-report exact-SHA review](ERP_MCP_HISTORICAL_REPORT_AUDIT_2026-10-10.md) confirms that **all 19 original Russian-named candidate documents have English coverage**: 13 operational/Phase 2 Markdown documents have English contents proposed in [ERP_MCP #38](https://github.com/xLZDx/ERP_MCP/pull/38) (draft, **not merged**), and six Russian historical HTML reports already had `.html` English companions. All six English HTML files were directly fetched; four contain zero Cyrillic, while two contain native-language 1C/test evidence (**23** and **39,178** literal Cyrillic characters). Both real-1C report links resolve. Do **not** translate the original source/banking data in place. English content and shell exist; semantic/1C/data-field integrity still require review.
+
+**This closes missing-English-counterpart inventory for the 19-file selected cohort only. It does not close the entire ERP_MCP repository or production-readiness program.**
+
 ## Constraints
 
 Keep API identifiers, structured content, tests, historical decisions and financial/private source values unchanged. Do not silently translate real 1C metadata identifiers. Translate immutable reviews into separate English companion records with attribution where needed.
