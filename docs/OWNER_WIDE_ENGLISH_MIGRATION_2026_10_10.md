@@ -64,6 +64,10 @@ All proposed replacement content was checked for Cyrillic before submission. Tra
 
 **Important:** All three PRs are **still open drafts**. Translation companion coverage, absence of literal Cyrillic and valid relative files do **not** certify current implementation, independent semantic fidelity, acceptance gates or account-wide English-only status.
 
+## ERP_MCP English Historical Report Pair Validation
+
+[All six original/English report pairs](translation_targets/ERP_MCP_HISTORICAL_REPORT_AUDIT_2026-10-10.md) were read at exact ERP_MCP draft tree HEAD `8d17448cf2788f48a2b3f26eb70800cefed4d992`. **Six of six English `.html` files exist, four have zero Cyrillic, two detailed real-1C reports carry native-language evidence** (23 / 39,178 Cyrillic characters). Relative real-1C cross-links resolve. Together with the **13** Markdown docs translated in [draft ERP_MCP #38](https://github.com/xLZDx/ERP_MCP/pull/38), the selected Russian-named 19-document cohort now has **19/19 English coverage** (draft or pre-existing), **not** proof of source semantic fidelity, literal English-only content or a merged repo. Native 1C business evidence remains preserved.
+
 ## Additional Exact-HEAD Cohorts and Translation Slices — October 10
 
 ### Three fully scanned default-tree Markdown/TXT cohorts
