@@ -10,7 +10,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.audit_tracked_language import classify, decode_text, scan
+from tools.audit_tracked_language import classify, decode_text, is_candidate_text_path, scan
 
 
 def run_git(root: Path, *args: str) -> None:
@@ -34,6 +34,15 @@ class LanguageInventoryTests(unittest.TestCase):
         self.assertEqual(
             classify("src/main.py"), "CODE_COMMENTS_OR_STRINGS_REVIEW"
         )
+
+    def test_source_languages_and_extensionless_build_files_are_included(self) -> None:
+        self.assertTrue(is_candidate_text_path("src/HelloWorld.java"))
+        self.assertTrue(is_candidate_text_path("app/Services/Handler.cs"))
+        self.assertTrue(is_candidate_text_path("backend/controller.go"))
+        self.assertTrue(is_candidate_text_path("Dockerfile"))
+        self.assertTrue(is_candidate_text_path("Makefile"))
+        self.assertFalse(is_candidate_text_path("assets/posters/russian_twist.jpg"))
+        self.assertFalse(is_candidate_text_path("vendor/library.dll"))
 
     def test_text_decoding_rejects_binary_data(self) -> None:
         self.assertIsNone(decode_text(b"ab\x00cd"))
