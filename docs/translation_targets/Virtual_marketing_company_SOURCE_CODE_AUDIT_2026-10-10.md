@@ -3,14 +3,14 @@
 **Inspection date:** October 10, 2026  
 **Repository:** `xLZDx/Virtual_marketing_company`  
 **Source tree pinned to:** `2b6604a1a52f1d8ec67675fada7330b674573bf1`  
-**Method:** Connected GitHub `fetch_file` reads of **25 selected non-test application/source files**, with per-file Cyrillic counts. No source file or business record was modified.
+**Method:** Connected GitHub `fetch_file` reads of **60 selected application, deployment, warehouse and test files**, with per-file Cyrillic counts. No source file or business record was modified.
 
 ## Actual findings
 
-- **25 of 25 selected application/source files were inspected.**
-- **18** contained no literal Cyrillic characters.
-- **7** contained Cyrillic, with the exact Git blob SHAs and character counts below.
-- Roughly 35 other detected code/test/deployment files in the repository **were not inspected in this targeted pass**. Do not claim a completed whole-repository scan.
+- **60 of 60 selected code/test/deployment files were inspected** at the pinned exact source tree.
+- **45** contained no literal Cyrillic characters.
+- **15** contained Cyrillic, with the exact Git blob SHAs and character counts in the two tables below.
+- This is a full inspection of the 60 specifically enumerated application/test/deployment files, **not** a scan of every tracked text file or all active branches.
 
 | Git path | Blob SHA | Cyrillic chars | Classification and required action |
 | --- | --- | ---: | --- |
@@ -22,7 +22,24 @@
 | `scripts/identity_guard.py` | `05522757e941cae145ba62bbade8df03bafcc37c` | 40 | **IDENTITY/PRIVACY TEST DATA.** Cyrillic personal-name/homoglyph and phone markers are threat-model examples or regex patterns. Translate surrounding prose only after checking negative privacy tests; retain the literal test vectors. |
 | `scripts/scan_forum_questions.py` | `2156b78abc1d38aaf102c0330e859532e2043462` | 82 | **LANGUAGE-SPECIFIC DISCOVERY TERMS.** Queries for genuine Russian forum questions. Translation would change targeting; use a separately qualified multilingual query catalog, not blind replacement. |
 
-The absence of literal Cyrillic from the other 18 selected code files does **not** prove that all their content is English or that their full product workflows are validated.
+The absence of literal Cyrillic from the other 45 selected code files does **not** prove that every sentence is English or that the associated product behavior has been validated.
+
+## Additional Test and Deployment File Findings
+
+The remaining 35 files in this selected application/test/deployment cohort were inspected after the initial 25-file assessment. **Twenty-seven had zero literal Cyrillic, and eight contained Cyrillic**, as detailed below. The four historical deployment shell scripts and five BigQuery SQL models inspected contained no Cyrillic.
+
+| Git path | Blob SHA | Cyrillic chars | Classification and handling |
+| --- | --- | ---: | --- |
+| `gui/tests/test_gui.py` | `b23288880a90a6cb764e8c7aeca3b1e3c596236f` | 194 | **Synthetic Russian UI and privacy fixtures.** Tests use realistic lead questions, phone/name examples, decisions and Russian reply text. Keep exact assertions until separately changing the UI locale contract. |
+| `scripts/test-business-os.py` | `e52154ea22291c0d2d0e939946d5b7cdd480ceb9` | 257 | **Marketing gate and product ground-truth assertions.** The tests search for actual Russian-language rules, unsupported prices, false technique claims and landing-page disclosure. Do not translate fixture assertions without migrating the source and maintaining negative protection. |
+| `scripts/test-collector.py` | `37dc7e9363a9a8c9b815fd69c6501296420e5b64` | 63 | **Synthetic location/PII and legal-text regression fixtures.** Exact Cyrillic input verifies collector data classification and landing copy; preserve privacy coverage. |
+| `scripts/test-distribution-slice.py` | `0c47008df622de6d1e289dd3126b3bc34bdaba38` | 1,352 | **Security/consent enforcement fixtures.** Russian content atoms, unsupported claims, identity leakage, prices and real approval-gate hashes test the actual language-specific safety contract. |
+| `scripts/test-draft-progress-post-llm.py` | `d784e37c5cd25f01788c8179442c7a1b3e1526d3` | 82 | **Language-specific LLM response fixtures.** Sample drafts are deliberately Russian; do not replace until input/output language handling is tested. |
+| `scripts/test-draft-reply-llm.py` | `f106e4cda1bfaf5b8af893a725e555f0c46c80ab` | 110 | **Multilingual reply-test fixtures.** Original Russian questions/replies verify pass-through, developer disclosure and output expectations; not GitHub prose. |
+| `scripts/test-identity-guard.py` | `55278d67551d6f9b38319d6593e4a680ae19506f` | 10 | **Privacy attack vector.** The Cyrillic telephone marker tests leak detection; preserve the exact fixture. |
+| `scripts/test-scan-forum-questions.py` | `52803990beebaa7f570373972ffe50a81ab8050b` | 162 | **Russian forum matching fixtures.** Cases cover relevant vs irrelevant equipment questions and body content; translation would change discovery semantics. |
+
+**Method limitation:** This classification is from read-only GitHub blob content and inspection of the matched lines. No tests for these application modules were run during the language audit. Preserving the original text is safer than converting a real negative test into a passing but meaningless English-only assertion.
 
 ## Functional and Security Decision
 
@@ -37,6 +54,6 @@ Recommended future product work is a properly scoped multilingual-content featur
 
 ## Incomplete Scope
 
-The audit did not scan every test and CI file, GitHub comments, release branches or encrypted/local artifacts. Remaining text should be inventoried on exact Git HEADs. Binary and LFS assets are not asserted to be English.
+The audit does not cover every Markdown/HTML report, all files under hidden agent directories or the operational ledgers, GitHub comments, release branches or encrypted/local artifacts. Remaining text should be inventoried on exact Git HEADs. Binary and LFS assets are not asserted to be English.
 
-**Disposition:** Targeted source audit **DONE (25 files)**; full language migration **NOT COMPLETE**. No source change, secret exposure, marketing approval, or production deployment was carried out.
+**Disposition:** Targeted source/test audit **DONE (60 files: 45 with no Cyrillic, 15 requiring language-specific preservation/review)**; full language migration **NOT COMPLETE**. No source change, secret exposure, marketing approval, or production deployment was carried out.
