@@ -117,6 +117,12 @@ The following counts are **path-pattern matches only**, not guaranteed Russian c
 
 All other inspected repositories had zero **filename-pattern matches**; this does not imply their documents or source comments are English. Examples of Cyrillic text in files without a Russian filename were confirmed in the broader GitHub code search.
 
+## October 11 — Fitness-App Active Text and Six New Core Translations
+
+[Fitness-App exact-source audit](translation_targets/Fitness_App_ACTIVE_TEXT_AUDIT_2026-10-11.md) covers **94 selected current Markdown/prompt texts**: 41 agents/commands/skills (all zero-Cyrillic), five root/policy documents (three no-Cyrillic, two literal bilingual GO authorization), and 48 selected core documents (29 zero-Cyrillic, 19 original-language). Six substantial historical Russian/mixed-language core documents now have separate English companions in [Fitness-App Draft PR #1](https://github.com/xLZDx/Fitness-App/pull/1): full August 11 release BLOCK audit, August 14 consent-gate checkpoint, August 7/8 session logs, September 25 handoff, and the proposed favorite-gym/news plan. Exact original source SHAs and local links verified; [core index](https://github.com/xLZDx/Fitness-App/blob/docs/add-english-readme-20261010/core/INDEX.md) links all six.
+
+Previous 88-report / 15-original-redesign-blob English coverage remains separately recorded. This **does not certify all 335 Markdown/TXT files on the current Fitness-App draft tree**, its approximately 4.1 MB immutable decision log, active Dart source comments, non-default branches or historical GitHub discussions. Original user-facing Russian strings and owner approval tokens were preserved, no Flutter/Firebase/user data changed, and independent semantic/merge review remains pending.
+
 ## Required continuation order
 
 1. Review and merge the eleven draft PRs currently open for English README changes. Do not merge without checking exact HEAD, build links, and repository review rules.
