@@ -24,20 +24,21 @@ The exact-HEAD GitHub diff contains **two Markdown files only**. Re-fetch QA: ze
 ## 2. ReviewExistingExamples — Russian Imported Fitness/Figma Prompts
 
 **PR:** [ReviewExistingExamples #1](https://github.com/xLZDx/ReviewExistingExamples/pull/1)  
-**Exact draft HEAD:** `791fe68e71361853d3b8c0d0582b0099c91af62d`
+**Exact draft HEAD:** `a872a15690462f6841b84adca69b6ae69411c71c`
 
 | English artifact | Git blob SHA at reviewed HEAD | Original source blob | Fidelity boundary |
 | --- | --- | --- | --- |
+| `src/imports/FIGMA_FULL_APP_REFACTOR_PROMPT_v1.3.en.md` | `e1acd2e34e9a329c75ae5fbe3aa2afe906b5254e` | `81538d09cb23d2c6acc8b84b61da5450128ca4cb` | Master historical v1.1 refactor brief + appended v1.3 update: all **29** numbered design sections, **17** DoD criteria, D1–D9 stop/review gates and 44-question internal Decision Registry governance; unverified app-feature assertions are explicitly qualified |
 | `src/imports/FIGMA_DECISION_REGISTRY_SCREEN_PROMPT_v1.3.en.md` | `338807ec0e0627ac4eb9a31ef867aae964a75a62` | `230fc80a994c11c324f3b97f0c212590dd754525` | Fourth internal ResearchScreen tab; 44 decisions, filters, D6 blockers and Q39/Q19 corrections |
 | `src/imports/OPEN_DECISIONS_REGISTER_v1.3.en.md` | `76c715450c3f59e09801337e88ec2705670b6d98` | `b39a24ae56d569e764388a701c17c50a2b51c26c` | All 44 historical questions/owners/options; 22/8/14 counts; hard blockers and duplicates retained |
 | `src/imports/pasted_text/body-metrics-onboarding.en.md` | `aacb88196036708b61375cbf3cbf759e4d469084` | `6de60f3ffc1e346ea3dda8f039571e6785346e9b` | Eight requirement areas, adult/under-20 BMI behavior, Health Connect consent, accessibility, complete eight-deliverable request |
 | `src/imports/pasted_text/progress-photo-compare.en.md` | `a6c24c07053988e4a3b58fdfd1c516811f494229` | `fef2d61026a0c87076cc12e1607411d31d7f2061` | All **20** photo progress design sections: capture, angle consistency, privacy, compare modes, explicit export and prohibited body/medical claims |
 | `src/imports/pasted_text/tech-coach-module.en.md` | `518a6835f225cc6d0a9d1a97f6dce31e89ea3e27` | `bbd4d788052834a62d82f64aa6015f8095faed5d` | All **27** Technique Coach requirement sections, quality gates, live cues, privacy, open product questions and 18 DoD deliverables |
-| `README.md` | `64fa93f97b92d8898f8d77f114cdebb614aff5d7` | New draft English root | Links all five translations and describes them as unapproved source materials |
+| `README.md` | `0e5c3847e7394ca0c915c8ebd64a72df8f694b52` | New draft English root | Links all six translations and describes them as unapproved source materials |
 
 The original Figma screen prompt and open decision register each have **two identically hashed source copies**; only one English companion was created for each pair, with both originals linked. The original Russian inputs remain byte-exact.
 
-QA on exact HEAD: **6 Markdown-only changed files**, zero Cyrillic in proposed English files, zero broken relative links, and unchanged original source blob SHAs.
+QA on exact HEAD: **7 Markdown-only changed files**, zero Cyrillic in proposed English files, zero broken relative links, and unchanged original source blob SHAs.
 
 **Important:** This is not a Flutter implementation, an approved copy rewrite, a signed stakeholder choice, medical advice, a new health-data permission or evidence that any of the 44 decisions have been closed. The translated requirements need independent semantic and design-governance review before becoming active product scope.
 
@@ -50,6 +51,13 @@ QA on exact HEAD: **6 Markdown-only changed files**, zero Cyrillic in proposed E
 
 ## Disposition
 
-**Two additional source-language documentation targets translated in existing isolated draft branches:** one arbitrage-research file's Russian passages and **five** unique imported Fitness App design requirements. Proposed changes cover **8 Markdown files** across the two PRs, while all original Russian sources and runtime artifacts remain unchanged.
+**Two additional source-language documentation targets translated in existing isolated draft branches:** one arbitrage-research file's Russian passages and **six** unique imported Fitness App design requirements. Proposed changes cover **9 Markdown files** across the two PRs, while all original Russian sources and runtime artifacts remain unchanged.
 
-**Not merged.** Owner-wide GitHub English migration remains open, and other large imported Russian Figma prompts in `ReviewExistingExamples/src/imports/` still require individual translation.
+**Not merged.** Owner-wide GitHub English migration remains open, and other imported Russian Figma prompts in `ReviewExistingExamples/src/imports/` still require individual translation.
+
+
+### Master Figma refactor v1.1 + v1.3 source-version caveat
+
+The file named `FIGMA_FULL_APP_REFACTOR_PROMPT_v1.3.md` begins with an internal `v1.1` heading and ends with a separate `UPDATE v1.3 — Decision Registry`. Its English companion preserves **both version markers**, all 29 numbered master sections and the appended governance contract, including **D1 STOP until review**, 17 historic acceptance criteria, Q19/Q20/Q21/Q23/Q26 hard blockers and the operator's locked Flutter selection (Q39). The original and `-1` duplicate share exact source blob `81538d09cb23d2c6acc8b84b61da5450128ca4cb` and were not altered.
+
+At exact branch HEAD `a872a15690462f6841b84adca69b6ae69411c71c`, the new master English file has zero Cyrillic, **29 numbered sections**, valid original references, and the README links it without broken relative paths. The original brief claimed features such as 1,887 exercises and on-device form detection; those claims remain **unverified design premises**, never current source/runtime proofs.
