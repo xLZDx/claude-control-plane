@@ -56,6 +56,14 @@ No source or deployment code was changed in these README-only operations. Empty 
 
 All proposed replacement content was checked for Cyrillic before submission. Translation fidelity, exact anchors, links, tests and public-facing publication claims still need independent review; the PRs are intentionally drafts.
 
+## October 10 Continuation — Source-Safe Documentation Coverage
+
+- **ERP_MCP:** all **15** translated draft documents on [PR #38](https://github.com/xLZDx/ERP_MCP/pull/38) passed the [exact-HEAD structural/path audit](translation_targets/ERP_MCP_DOCS_QA_2026-10-10.md): zero Cyrillic, 74 valid local file paths, 58 balanced fence delimiter lines in total, no executable code edits. Semantic/command review remains open.
+- **Virtual_marketing_company:** [PR #1](https://github.com/xLZDx/Virtual_marketing_company/pull/1) now has **29 Markdown files** at `b45bc052663b813a0e434e72fac68683625d25f9`, including all 23 historical report companions, two existing source-linked guides, an English root README/index, plus [SPTR product](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/products/sptr/product.en.md) and [live validation](https://github.com/xLZDx/Virtual_marketing_company/blob/docs/english-readme-20261010/docs/04_LIVE_VALIDATION_PLAYBOOK.en.md) English explanatory references. Separately [69 selected current-doc/agent files](translation_targets/Virtual_marketing_company_ACTIVE_DOC_AUDIT_2026-10-10.md) were examined: **48 without Cyrillic, 21 with contract-sensitive Russian examples** classified by blob SHA. Canonical source, founder approvals and live product copy were not rewritten.
+- **PDCC:** [draft PR #146](https://github.com/xLZDx/Personal_Decision_Command_Center/pull/146) contains **10 Markdown changes** at `f19c3ab94e150d872d2d59646e9302796bd3dd26`, adding an English [September 10 TDD v0.2 adversarial review companion](https://github.com/xLZDx/Personal_Decision_Command_Center/blob/docs/english-handoff-20261010/governance/reviews/02-tdd-v0.2-adversarial-review.en.md). The dated one-blocker/three-major historical NO-GO and later policy-precedence limitations were preserved; original report and implementation remain unchanged.
+
+**Important:** All three PRs are **still open drafts**. Translation companion coverage, absence of literal Cyrillic and valid relative files do **not** certify current implementation, independent semantic fidelity, acceptance gates or account-wide English-only status.
+
 ## Remaining Russian-named file inventory, by repository
 
 The following counts are **path-pattern matches only**, not guaranteed Russian content:
