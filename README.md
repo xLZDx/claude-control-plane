@@ -52,6 +52,7 @@ are the author's real Windows paths; adapt them to your machine.
 
 - [English authoring and preservation policy](docs/GITHUB_ENGLISH_AUTHORING_POLICY.md)
 - [34-repository inventory and status](docs/OWNER_WIDE_ENGLISH_MIGRATION_2026_10_10.md)
+- [Corrected counterpart audit: 426 already paired, 14 translated in draft](docs/EXISTING_ENGLISH_COUNTERPARTS_2026_10_10.md)
 - [Current issue and PR description audit](docs/ACTIVE_GITHUB_DISCUSSIONS_LANGUAGE_AUDIT_2026_10_10.md)
 - [Global mirror and hook language exceptions](docs/GLOBAL_MIRROR_CYRILLIC_PRESERVATION_2026_10_10.md)
 - [Read-only Git HEAD scanner](tools/audit_tracked_language.py) and [synthetic tests](tests/test_language_inventory.py)
