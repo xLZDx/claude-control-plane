@@ -66,6 +66,14 @@ Default branch at inventory: `master` at `214af1ee3d0d847b97c38d84ce89650df3e542
 | `reports/request-id-wire-protocol-2026-09-12.ru.html` | `f74c4f57601eb82a75bd8c45973bee28c30f49e1` |
 | `reports/security-review-closure-plan-2026-09-13.ru.html` | `000b5ef6403220fb5b79e8eb58a3528b74ae96e4` |
 
+## Complete Historical Report English Coverage — October 10
+
+[All 57 original/English reports reviewed by exact blob SHA](PM_Bridge_HISTORICAL_REPORT_LANGUAGE_AUDIT_2026-10-10.md): **57/57** English HTML counterparts directly fetched, **50 zero Cyrillic, seven preserving original owner/session/GO evidence (383 Cyrillic characters)**. Original source reports and existing English HTML were not rewritten.
+
+[PM Bridge Draft PR #1](https://github.com/xLZDx/PM_Bridge/pull/1) at HEAD `9cee55d933688abd0726566202090d48e01b04fc` now adds an [English report index](https://github.com/xLZDx/PM_Bridge/blob/docs/english-historical-reports-20261010/reports/ENGLISH_HISTORICAL_REPORTS_INDEX.md) of all 57 and working Gate P H1/H2 evidence links, plus README navigation and two pre-existing English Markdown report companions. **120** local Markdown links tested, **zero unresolved**; only **four Markdown files** changed. Two archived Gate P HTML `href` paths are broken; index alternatives work.
+
+The prior PM Bridge selected Markdown/TXT audit covers 34/34 files (21 zero-Cyrillic, 13 source-bound exceptions). Source code and maintained branches still require review. **Historical report cohort 57/57 English-covered; broader project and independent semantic review not complete.**
+
 ## Guardrails
 
 Preserve historical audit evidence, customer data, external identifiers, API names, and 1C metadata. Translate surrounding explanation without mutating structured records. Do not merge without per-file review and validation.
