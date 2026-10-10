@@ -97,6 +97,16 @@ Default branch at inventory: `master` at `3da7737e388434250ef61a1e24cd67f8cab5c4
 | `reports/r_d1_hardening_gate_2026-08-19.ru.html` | `feb5f63bfb0eb6915d59c6c1a9605ab25d4ab573` |
 | `reports/sptr_final_autonomous_program_2026-08-21.ru.html` | `f5c7751e41547c01ce255d6e7c8edaa289d5e99e` |
 
+## Current Document Audit and Six English Historical Companions — October 11, 2026
+
+[Exact-SHA 94-file agent/authoring/core document audit](Fitness_App_ACTIVE_TEXT_AUDIT_2026-10-11.md): **94 selected text sources read**, **73 without Cyrillic**, **21 with source-bound original language**. The 41 project agents/commands/skills are already English. The only two Cyrillic-bearing root/prompt sources use the exact bilingual operator approval token; replacing it would change dispatch authority.
+
+[Fitness-App Draft PR #1](https://github.com/xLZDx/Fitness-App/pull/1) at inspected HEAD `9fdfe74e4807e5e9e9415c1ee5bf0fb4d072d018` now contains **six new English historical core companions** linked from [`core/INDEX.md`](https://github.com/xLZDx/Fitness-App/blob/docs/add-english-readme-20261010/core/INDEX.md): August 11 full release-blocker audit, September 25 handoff, August 1 favorite-gyms/news proposal, August 14 R11f-1 consent handoff, August 7 scanner state and August 8 rolling session/gate log. **6/6** original SHA values still match, new English text has zero Cyrillic, relative original links resolve, and Markdown code fences are balanced.
+
+Previous [Fitness-App 88 historical report/15 redesign-source audit](Fitness_App_88_REPORT_AND_REDESIGN_AUDIT_2026-10-10.md) remains distinct. It covers **88/88** existing English HTML report sibling paths and **15/15** unique source design-doc blobs with English or already-English text. The selected 94-file scan does **not** cover the entire repository (335 Markdown/TXT on this draft tree, very large append-only decision log, Dart source comments, all other branches or past GitHub review threads).
+
+The original historical STOP, privacy, user data and push/GO statements remain intact. These translations are **not** current release or independent semantic approval; the PR remains draft.
+
 ## Guardrails
 
 Preserve historical audit evidence, customer data, external identifiers, API names, and 1C metadata. Translate surrounding explanation without mutating structured records. Do not merge without per-file review and validation.
