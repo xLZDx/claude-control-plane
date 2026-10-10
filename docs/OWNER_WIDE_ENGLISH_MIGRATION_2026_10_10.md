@@ -64,6 +64,23 @@ All proposed replacement content was checked for Cyrillic before submission. Tra
 
 **Important:** All three PRs are **still open drafts**. Translation companion coverage, absence of literal Cyrillic and valid relative files do **not** certify current implementation, independent semantic fidelity, acceptance gates or account-wide English-only status.
 
+## Additional Exact-HEAD Cohorts and Translation Slices — October 10
+
+### Three fully scanned default-tree Markdown/TXT cohorts
+
+[Complete 115-file language inventory](translation_targets/THREE_REPO_ACTIVE_TEXT_AUDIT_2026-10-10.md) directly inspected **all tracked Markdown and TXT** in `Usefull_agents_and_skils` (49), `PM_Bridge` (34) and `TENDER` (32). **92 files** had no Cyrillic; **23 contained deliberate owner/source quotations, official names, historical gate labels or execution tokens**. Each exception is classified with its Git blob SHA. The global agent/skill repository has only one Cyrillic-positive file: `skills/rosetta/SKILL.md` with the operator's literal bilingual GO marker. **No automatic conversion of this authorization token** is safe. In PM_Bridge, visually confusable Latin/Cyrillic gate labels require separate reference analysis, not a mass replace.
+
+At the reviewed exact drafts, [PM_Bridge #1](https://github.com/xLZDx/PM_Bridge/pull/1) retains two English source-linked historical reports and [TENDER #1](https://github.com/xLZDx/TENDER/pull/1) retains three; all five English Markdown files were re-fetched, free of literal Cyrillic, and linked to their retained originals with zero missing relative paths. These are documentation-only proposals awaiting independent review.
+
+### Two new substantive translation slices
+
+[Translation evidence and exact SHA table](translation_targets/ARBITRAGE_AND_FIGMA_IMPORT_TRANSLATIONS_2026-10-10.md):
+
+- [arbitrage-strategy PR #1](https://github.com/xLZDx/arbitrage-strategy/pull/1) at `d05642f4c8ccd483b491b44934f0f9189a678d2b` adds an English companion translating Russian research passages in the 796-line mixed-language `arbitrage.txt` (77 Cyrillic-bearing lines), and links it from the root README. Conflicting original DuckDB/QuestDB assumptions and unverified market-execution claims remain explicitly qualified.
+- [ReviewExistingExamples PR #1](https://github.com/xLZDx/ReviewExistingExamples/pull/1) at `f3452c37e52231ae0ef180421462d4d7b3a3db49` adds English companions for the Figma Decision Registry screen, the **44-question** product-decision register and the Body Metrics Onboarding design request; the English README links all three. Preserve the source documents, status distinctions, Q19/Q39 decisions, neutral BMI/under-20 requirements, Health Connect consent and design-review boundary.
+
+Both PRs change **six Markdown files combined**, with zero Cyrillic in proposed English, no unresolved relative links and no runtime/prototype/trading implementation changes. **Draft, not merged or semantically signed off**. Other substantial Russian imported design references remain open.
+
 ## Remaining Russian-named file inventory, by repository
 
 The following counts are **path-pattern matches only**, not guaranteed Russian content:
