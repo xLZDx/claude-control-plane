@@ -59,7 +59,7 @@ SECRET_PATTERNS = {
     "aws_key": r"AKIA[0-9A-Z]{16}",
     "public_ipv4": r"\b(?!127\.|0\.|10\.|192\.168\.)\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b",
     "chatgpt_conversation": r"chatgpt\.com/c/[0-9a-f-]{20,}",
-    "real_email": r"[A-Za-z0-9._%+-]+@(?!example\.com)(?!github\.com)(?!users\.noreply\.github\.com)[A-Za-z0-9-]+\.[A-Za-z]{2,}",
+    "real_email": r"[A-Za-z0-9._%+-]+@(?!example\.com)(?!your-domain\.com)(?!github\.com)(?!users\.noreply\.github\.com)[A-Za-z0-9-]+\.[A-Za-z]{2,}",
 }
 
 

@@ -26,6 +26,8 @@ class SecretScanTests(unittest.TestCase):
     def test_flags_real_email_but_not_placeholders(self):
         self.assertTrue(ex.scan_text("mail someone@gmail.com"))
         self.assertFalse(ex.scan_text("test@example.com git@github.com 1+x@users.noreply.github.com"))
+        self.assertFalse(ex.scan_text("template you@your-domain.com"))
+        self.assertTrue(ex.scan_text("mail you@your-domain.org"))
 
     def test_flags_chatgpt_conversation_link(self):
         self.assertTrue(ex.scan_text("https://chatgpt.com/c/6abf8c09-621c-83eb-a5f1-855dd621ce18"))
