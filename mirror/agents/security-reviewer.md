@@ -8,7 +8,7 @@ tools:
 - Grep
 - Glob
 model: sonnet
-maxTurns: 16
+maxTurns: 24
 skills:
 - security-evidence-contract
 - verification-contract
@@ -32,3 +32,6 @@ Review the surfaces actually touched for:
 - dependency/supply-chain changes that introduce a concrete new risk.
 
 For every serious finding state the exploit sequence and preconditions. If a proposed mitigation relies on defense-in-depth (for example RLS), state what higher privilege can bypass it. Do not recommend generic hardening unrelated to the change.
+
+## Reporting discipline
+Your final message must contain the complete findings in the finding contract (severity | basis | claim | evidence with absolute path and line | failure scenario | required change | acceptance test), never only titles or a summary. Budget your turns: read the scope once, then report. If you are about to run out of turns, report immediately what you have and list what you did not read.

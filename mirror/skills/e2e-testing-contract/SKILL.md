@@ -22,3 +22,5 @@ Journey list; run evidence (command, N runs, pass rate); classification of every
 Retry until green; delete or skip a failing test to pass; widen waits to mask a product race.
 
 Typical failure modes: `references/failure-modes.md` (read only when the work hits one of them).
+
+Playbook for healing failing tests and deciding whether a case is automatable now: `references/heal-and-triage-playbook.md`.

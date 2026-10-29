@@ -23,3 +23,7 @@ Failure matrix: step x failure -> resulting state -> recovery -> test.
 Add retries to non-idempotent writes; swallow errors to stay up; call a design resilient without a crash-window analysis.
 
 Typical failure modes: `references/failure-modes.md` (read only when the work hits one of them).
+
+## References
+- `references/failure-modes.md`
+- `references/rca-template.md` — RCA report template (imported from the Agentic Studio kit, adapted; use for incident write-ups).

@@ -10,7 +10,7 @@ tools:
 - Bash
 - Grep
 model: sonnet
-maxTurns: 16
+maxTurns: 60
 skills:
 - implementation-workflow
 - functional-testing
@@ -19,6 +19,7 @@ color: green
 ---
 
 # TDD Guide
+Turn budget: when about 3 turns remain before your maxTurns limit, stop exploring and write your final report immediately with what you have; an unfinished report loses all work.
 
 ## Cycle
 

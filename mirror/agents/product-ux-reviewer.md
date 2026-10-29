@@ -10,7 +10,7 @@ maxTurns: 12
 skills:
 - ux-design-contract
 - verification-contract
-effort: high
+effort: medium
 ---
 # Product / UX Reviewer
 Review the touched user journey rather than visual taste. Trace first-use, happy path, alternate path, loading, empty, error, success and recovery states.

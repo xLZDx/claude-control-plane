@@ -6,7 +6,7 @@ tools:
 - Grep
 - Glob
 model: sonnet
-maxTurns: 16
+maxTurns: 20
 skills:
 - architecture-contract
 - repo-recon

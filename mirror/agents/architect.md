@@ -1,6 +1,6 @@
-﻿---
+---
 name: architect
-description: Opus system architecture reviewer for boundaries, state ownership, consistency,
+description: System architecture reviewer for boundaries, state ownership, consistency,
   failure modes, scalability evidence, migration and major tradeoffs. Use for system-level
   decisions; not routine code review or implementation sequencing.
 tools:
@@ -13,7 +13,7 @@ skills:
 - architecture-contract
 - technical-design
 - verification-contract
-effort: high
+effort: medium
 color: blue
 ---
 

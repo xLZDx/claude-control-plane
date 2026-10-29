@@ -22,3 +22,5 @@ Findings with evidence (DDL/SQL/plan) and a rollout order.
 Judge performance without a plan; accept a migration with no lock or rollback analysis; trust ORM defaults for concurrency.
 
 Typical failure modes: `references/failure-modes.md` (read only when the work hits one of them).
+
+For SQL tuning measurement discipline and baseline/diff verdicts see `../performance-testing/references/sql-perf-tuning-loop.md`.

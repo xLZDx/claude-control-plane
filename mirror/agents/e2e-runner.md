@@ -11,7 +11,7 @@ tools:
 - Grep
 - Glob
 model: sonnet
-maxTurns: 16
+maxTurns: 55
 skills:
 - e2e-testing-contract
 - ci-release-contract
@@ -21,6 +21,7 @@ color: green
 ---
 
 # E2E Runner
+Turn budget: when about 3 turns remain before your maxTurns limit, stop exploring and write your final report immediately with what you have; an unfinished report loses all work.
 
 Use whatever E2E stack the repository already has. Detect it before writing anything (`playwright.config.*`, `cypress.config.*`, `package.json` scripts, CI workflow). Do not introduce a new framework or a new tool dependency without operator approval.
 

@@ -29,8 +29,9 @@ Three decisions here are load-bearing, all of them from GPT-PM's design review (
    in its input mentioned, which is why there is a second phase at PostToolUse and why closure
    reconstructs the real changed-set from git rather than from these records.
 
-Kill switch: CLAUDE_ROSETTA_GATE=off (process-level, set before the session starts -- the same
-convention every other hook in this directory uses).
+Switch: Rosetta is OFF unless `~/.claude/state/rosetta_mode.json` says {"enabled": true}; the
+`/rosetta on|off` command writes it via `rosetta_mode.py`, and every hook call re-reads it, so a
+toggle applies at once. CLAUDE_ROSETTA_GATE=off|on (process-level) overrides the file.
 """
 from __future__ import annotations
 
@@ -61,8 +62,30 @@ def rosetta_dir() -> Path:
     return state_dir() / "rosetta"
 
 
+MODE_FILE = Path(os.path.expanduser("~")) / ".claude" / "state" / "rosetta_mode.json"
+
+
+def mode_file() -> Path:
+    override = os.environ.get("CLAUDE_ROSETTA_MODE_FILE")
+    return Path(override) if override else MODE_FILE
+
+
+def mode_enabled() -> bool:
+    """The `/rosetta on|off` switch. Absent or unreadable file = off (operator 2026-10-09)."""
+    try:
+        data = json.loads(mode_file().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    return isinstance(data, dict) and data.get("enabled") is True
+
+
 def gate_off() -> bool:
-    return os.environ.get("CLAUDE_ROSETTA_GATE", "").lower() == "off"
+    env = os.environ.get("CLAUDE_ROSETTA_GATE", "").lower()
+    if env == "off":
+        return True
+    if env == "on":
+        return False
+    return not mode_enabled()
 
 
 def _read_json(path: Path):

@@ -324,6 +324,13 @@ def main():
 
     is_push = bool(PUSH_RE.search(command))
     is_commit = bool(COMMIT_RE.search(command))
+    if is_commit:
+        try:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from _commit_detect import is_commit_command
+            is_commit = is_commit_command(command)  # not a commit when only mentioned in a string/heredoc
+        except Exception:
+            pass
     if not is_push and not is_commit:
         allow()
 

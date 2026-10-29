@@ -25,7 +25,7 @@
   "limits": {
     "global_instruction_tokens": 6000,
     "project_instruction_tokens": 4000,
-    "max_turns": 25,
+    "max_turns": 60,
     "skill_thin_front_door_tokens": 800,
     "skill_stub_tokens": 150
   }

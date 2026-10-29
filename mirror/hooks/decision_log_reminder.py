@@ -89,6 +89,27 @@ def main():
         "decision, piece of evidence, or refusal not yet logged, add it now -- in the "
         "same commit as the related code where a commit applies."
     )
+
+    # Lessons log (operator 2026-10-16, GLOBAL): a soft reminder only (never blocks,
+    # per the NO SECONDARY BLOCKERS rule). Kill switch: CLAUDE_LESSONS_LOG_REMINDER=off
+    if os.environ.get("CLAUDE_LESSONS_LOG_REMINDER", "").lower() != "off":
+        lessons_path = Path(repo_root) / "core" / "LESSONS_LOG.md"
+        if lessons_path.is_file():
+            context += (
+                " [Lessons log reminder] This project also keeps core/LESSONS_LOG.md "
+                "(~/.claude/CLAUDE.md 'LESSONS LOG'): every commit carries an entry in "
+                "the same commit -- FAILURE / SHORTCOMING / SUCCESS with facts, root "
+                "cause (or why it worked), which layer missed it (author, tests, "
+                "reviewers, gate) and the rule to apply next time. Record your OWN "
+                "mistakes at once, without being asked, and any defect a test, "
+                "reviewer or the operator found."
+            )
+        else:
+            context += (
+                " [Lessons log reminder] This project has no core/LESSONS_LOG.md yet: "
+                "create it with the first dated entry (~/.claude/CLAUDE.md 'LESSONS "
+                "LOG', operator rule 2026-10-16, every project)."
+            )
     print(json.dumps({
         "hookSpecificOutput": {
             "hookEventName": "UserPromptSubmit",

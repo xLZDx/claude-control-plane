@@ -7,7 +7,7 @@ tools:
 - Grep
 - Glob
 model: sonnet
-maxTurns: 10
+maxTurns: 16
 skills:
 - verification-contract
 effort: medium

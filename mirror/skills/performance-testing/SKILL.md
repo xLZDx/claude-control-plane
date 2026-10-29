@@ -22,3 +22,5 @@ Baseline vs after table (percentile, sample size, method); every claim labelled 
 Optimize cold code; claim a speedup from one noisy run; trade correctness or ordering for speed without tests.
 
 Typical failure modes: `references/failure-modes.md` (read only when the work hits one of them).
+
+SQL query tuning loop (capture, analyze, trial, baseline/diff verdicts, gates): `references/sql-perf-tuning-loop.md`.

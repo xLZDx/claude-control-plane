@@ -49,6 +49,12 @@ LOG_FILE = STATE_DIR / "decisions.jsonl"
 SESSION_REPO_DIR = STATE_DIR / "session_repo"
 
 COMMIT_RE = re.compile(r"\bgit\s+commit\b", re.IGNORECASE)
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from _commit_detect import is_commit_command  # `git commit` really executed, not just mentioned in text
+except Exception:  # fail open to the old text match if the helper is missing
+    def is_commit_command(command):
+        return True
 SKIP_RE = re.compile(r"--help\b|(?<!\S)-h\b|--dry-run\b", re.IGNORECASE)
 NAMED_ADD_RE = re.compile(r"git\s+add\b[^&|;]*DECISION_LOG\.md", re.IGNORECASE)
 BROAD_ADD_RE = re.compile(r"git\s+add\s+(-A\b|--all\b|\.\s|\.$|-u\b)", re.IGNORECASE)
@@ -198,7 +204,7 @@ def main():
         allow()
 
     command = (payload.get("tool_input") or {}).get("command", "") or ""
-    if not COMMIT_RE.search(command) or SKIP_RE.search(command):
+    if not COMMIT_RE.search(command) or not is_commit_command(command) or SKIP_RE.search(command):
         allow()
 
     raw_cwd = payload.get("cwd") or os.getcwd()

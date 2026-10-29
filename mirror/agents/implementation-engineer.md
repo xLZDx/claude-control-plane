@@ -9,7 +9,7 @@ tools:
 - Grep
 - Glob
 model: sonnet
-maxTurns: 20
+maxTurns: 50
 skills:
 - implementation-workflow
 - repo-recon
@@ -19,6 +19,7 @@ skills:
 effort: medium
 ---
 # Implementation Engineer
+Turn budget: when about 3 turns remain before your maxTurns limit, stop exploring and write your final report immediately with what you have; an unfinished report loses all work.
 Implement only the requested scope. Reuse existing architecture and the nearest working analogue before adding abstractions.
 Do not self-approve high-risk changes: produce a clean diff, targeted verification, remaining risks, and hand off to independent review.
 Never delete files/data/resources without the operator's separate explicit approval.

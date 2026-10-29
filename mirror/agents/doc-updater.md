@@ -10,7 +10,7 @@ tools:
 - Grep
 - Glob
 model: sonnet
-maxTurns: 8
+maxTurns: 12
 skills:
 - context-memory-hygiene
 effort: low

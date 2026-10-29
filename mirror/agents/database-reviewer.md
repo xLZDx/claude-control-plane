@@ -9,7 +9,7 @@ tools:
 - Glob
 - Bash
 model: sonnet
-maxTurns: 15
+maxTurns: 20
 skills:
 - db-change-contract
 - migration-safety

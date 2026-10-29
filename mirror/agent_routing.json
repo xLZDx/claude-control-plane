@@ -99,6 +99,17 @@
       ],
       "note": "architect has a dual role: B_domain_triggered for code (moved from C 2026-08-04), P_planning for plans."
     },
+    "D_sdlc_roles": {
+      "policy": "Authoring roles of the virtual scrum team. Launched by the sdlc-orchestrator skill for their SDLC phase only (never per code unit, never as reviewers).",
+      "agents": [
+        "business-analyst",
+        "product-owner",
+        "ui-designer",
+        "technical-writer",
+        "reporting-analyst"
+      ],
+      "note": "Added 2026-10-15. Phase map lives in skills/sdlc-orchestrator. Reuses architect, code-architect, implementation-engineer, functional-test-reviewer, e2e-runner, tdd-guide for the other roles."
+    },
     "T_task_scoped": {
       "policy": "Only when doing that exact task.",
       "agents": [
@@ -464,6 +475,7 @@
   },
   "risk_routing": {
     "effective": "2026-10-02",
+    "turn_budget_note_2026-10-30": "Built-in general-purpose has no maxTurns file or Agent-call parameter (a 889-turn run was observed, 47% of subagent cache reads). Prefer Explore (search) or a named specialist; give general-purpose a narrow brief with an explicit stop condition. Per-role maxTurns raised 2026-10-30 from measured p90 (cap max_turns=60 in control-plane/projects.json).",
     "principle": "Risk requires an agent -> the router selects the agent -> the model policy selects the cheapest sufficient model and effort. An agent existing is never a reason to invoke it. Triggers are evaluated by code (path globs, imports), never by an extra LLM triage call.",
     "model_policy": "~/.claude/control-plane/model_policy.json",
     "opus": "Never automatic. Per-run operator consent, effort=high only, xhigh forbidden. No consent receipt mechanism exists, so hooks/agent_model_gate.py fails closed.",
@@ -510,7 +522,7 @@
       },
       "T2": {
         "effort": "medium",
-        "maxTurns": "8-20",
+        "maxTurns": "8-60",
         "use": "ordinary implementation, language review, functional checks"
       },
       "T3": {
@@ -539,6 +551,11 @@
       "refactor-cleaner": "T2",
       "tdd-guide": "T2",
       "type-design-analyzer": "T2",
+      "business-analyst": "T2",
+      "product-owner": "T2",
+      "technical-writer": "T2",
+      "reporting-analyst": "T2",
+      "ui-designer": "T3",
       "a11y-architect": "T3",
       "architect": "T3",
       "code-architect": "T3",

@@ -40,7 +40,8 @@ Always allowed, so the gate cannot deadlock:
   - anything at all goes wrong: git missing, bad stdin, timeout, unreadable transcript. Fail open,
     never crash a session.
 
-Kill switches: CLAUDE_REPORT_GATE=off (everything in this file),
+OPT-IN (default OFF since 2026-10-15): set CLAUDE_REPORT_GATE=on to enable everything in this file.
+Kill switches once enabled: CLAUDE_REPORT_GATE=off (everything in this file),
 CLAUDE_REPORT_HANDOVER_GATE=off (check 2 only; must be set before the session starts)
 Decisions:   D:\\tmp\\claude_report_gate\\decisions.jsonl
 """
@@ -191,7 +192,9 @@ def handover_reason_for(report_path: str, action: str) -> str:
 
 
 def main() -> None:
-    if os.environ.get("CLAUDE_REPORT_GATE", "").lower() == "off":
+    # OPT-IN since 2026-10-15 (operator rule NO SECONDARY BLOCKERS): this gate blocks ordinary,
+    # reversible git work, so it is OFF unless CLAUDE_REPORT_GATE=on is set in the environment.
+    if os.environ.get("CLAUDE_REPORT_GATE", "").lower() != "on":
         allow()
 
     try:
@@ -201,6 +204,13 @@ def main() -> None:
 
     command = (payload.get("tool_input") or {}).get("command", "") or ""
     is_commit = bool(COMMIT_RE.search(command))
+    if is_commit:
+        try:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            from _commit_detect import is_commit_command
+            is_commit = is_commit_command(command)  # not a commit when only mentioned in a string/heredoc
+        except Exception:
+            pass
     is_push = bool(PUSH_RE.search(command))
     if not (is_commit or is_push) or SKIP_RE.search(command):
         allow()
