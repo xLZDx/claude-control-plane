@@ -25,8 +25,10 @@ SEPARATORS = re.compile(r"&&|\|\||;|\||\n|(?<![<>&])&(?![>&])")
 LEADERS = re.compile(r"^(?:[({]+\s*|!\s+|(?:then|do|else|elif|if|while|until)\b\s*)", re.I)
 PREFIXES = re.compile(
     r"^(?:"
-    r"sudo(?:\s+(?:(?-i:-[ughpCDrtUT])\s+\S+|-\w+|--[\w-]+(?:=\S+)?))*|"
-    r"doas(?:\s+(?:(?-i:-[uC])\s+\S+|-\w+))*|"
+    r"sudo(?:\s+(?:(?-i:-[ughpCDrtUT])\s+\S+|"
+    r"--(?:user|group|host|prompt|chdir|role|type|other-user|command-timeout|close-from)\s+\S+|"
+    r"-\w+|--[\w-]+(?:=\S+)?|--(?=\s)))*|"
+    r"doas(?:\s+(?:(?-i:-[uC])\s+\S+|-\w+|--(?=\s)))*|"
     r"env(?:\s+(?:-\S+|[A-Za-z_][A-Za-z0-9_]*=\S+))*|"
     r"nohup|time|"
     r"nice(?:\s+(?:-n\s*-?\d+|-?\d+))?|"

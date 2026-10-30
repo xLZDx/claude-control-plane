@@ -91,6 +91,22 @@ class TestWrapperOptions(BlockedMixin, unittest.TestCase):
         self.assert_allowed(["sudo -u root ls /", "timeout -s KILL 5 ls", "doas -u root ls", "sudo -H ls"])
 
 
+class TestWrapperLongOptionsAndTerminator(BlockedMixin, unittest.TestCase):
+    def test_blocked_long_options_and_double_dash(self):
+        self.assert_blocked([
+            "sudo --user root rm -rf /",
+            "sudo --group wheel rm -rf /",
+            "sudo --user=root rm -rf /",
+            "sudo -- rm -rf /",
+            "sudo -u root -- rm -rf /",
+            "doas -- rm -rf /",
+            "sudo --host h --user root git reset --hard",
+        ])
+
+    def test_allowed_long_options_and_double_dash(self):
+        self.assert_allowed(["sudo -- ls /", "sudo --user root ls /", "sudo -u root -- ls /", "doas -- ls"])
+
+
 class TestNoFalsePositives(BlockedMixin, unittest.TestCase):
     def test_redirections_not_separators(self):
         self.assert_allowed(["cmd 2>&1", "cmd &> out.log", "cmd >&2", "cmd 2>&1 | tee x", "cmd >& out.log"])
