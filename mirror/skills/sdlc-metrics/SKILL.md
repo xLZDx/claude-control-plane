@@ -15,7 +15,7 @@ A status, sprint report or retrospective input is needed.
 4. For substantive reports use the `html-report` skill conventions.
 
 ## Required output
-Sprint report or status table: item, state, evidence, blocker (if any), next action.
+Sprint report or status table: item, state, evidence, blocker (if any), next action. The full program/sprint report layout (overall bar, per-sprint bars, active-sprint task table, legend) is defined only in the `html-report` skill; "дай репорт" triggers it.
 
 ## Do not
 Count agents or tokens as quality; report green without the test result; hide failed or skipped items.

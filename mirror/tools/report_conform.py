@@ -8,9 +8,9 @@ Two elements are mandatory in every HTML report, in every project (operator inst
      git remote (plus branch and HEAD when available).
 
 Both are inserted as a single bar immediately after </header>, so placement does not depend on
-the report's own layout. The injected CSS reads the page's own custom properties with literal
-fallbacks (`var(--surface, #fff)`), so the bar adopts whatever palette the report already uses
-instead of fighting it.
+the report's own layout. The bar uses a fixed, high-contrast light palette rather than inheriting
+the report's custom properties: report themes can define surface and text colors with insufficient
+contrast, and provenance must remain readable in every report.
 
 Idempotent: re-running replaces the previously injected block rather than stacking copies, so it
 doubles as the way to refresh provenance after a commit.
@@ -61,23 +61,22 @@ LABELS = {
 
 STYLE = """<style id="rc-style">
 .rc-bar{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  margin:1.4rem 0 0;padding:0.9rem 1.05rem;background:var(--surface,#fff);
-  border:1px solid var(--border,var(--rule,#d9d9d9));
-  border-left:3px solid var(--accent,#6a6a6a);border-radius:3px}
+  margin:1.4rem 0 0;padding:0.9rem 1.05rem;background:#fff;color:#0f172a;
+  border:1px solid #cbd5e1;border-left:3px solid #2563eb;border-radius:3px}
 .rc-bar dl{display:grid;grid-template-columns:auto 1fr;gap:0.4rem 1rem;margin:0;min-width:0;
-  font-family:ui-monospace,"Cascadia Code","SF Mono",Consolas,monospace;font-size:0.74rem;line-height:1.5}
-.rc-bar dt{color:var(--text-3,var(--muted,#888));text-transform:uppercase;letter-spacing:0.08em;
+  color:#0f172a;font-family:ui-monospace,"Cascadia Code","SF Mono",Consolas,monospace;font-size:0.74rem;line-height:1.5}
+.rc-bar dt{color:#475569;text-transform:uppercase;letter-spacing:0.08em;
   font-size:0.66rem;white-space:nowrap;padding-top:0.15em}
-.rc-bar dd{margin:0;color:var(--text,var(--ink,#222));word-break:break-word;min-width:0}
+.rc-bar dd{margin:0;color:#0f172a;word-break:break-word;min-width:0}
 .rc-copy{flex:none;cursor:pointer;white-space:nowrap;
   font-family:ui-monospace,"Cascadia Code","SF Mono",Consolas,monospace;
   font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--accent,#6a6a6a);background:var(--surface-2,var(--surface,#fff));
-  border:1px solid var(--border,var(--rule,#d9d9d9));border-radius:2px;padding:0.45em 0.85em}
-.rc-copy:hover{border-color:var(--accent,#6a6a6a)}
-.rc-copy:focus-visible{outline:2px solid var(--accent,#6a6a6a);outline-offset:2px}
-.rc-copy.is-done{color:var(--ok,#1c6f53);border-color:currentColor}
-.rc-copy.is-fail{color:var(--bad,#9e2f2a);border-color:currentColor}
+  color:#1e293b;background:#f8fafc;
+  border:1px solid #94a3b8;border-radius:2px;padding:0.45em 0.85em}
+.rc-copy:hover{border-color:#2563eb}
+.rc-copy:focus-visible{outline:2px solid #1d4ed8;outline-offset:2px}
+.rc-copy.is-done{color:#166534;border-color:currentColor}
+.rc-copy.is-fail{color:#991b1b;border-color:currentColor}
 </style>"""
 
 SCRIPT = """<script>

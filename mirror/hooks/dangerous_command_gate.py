@@ -19,15 +19,18 @@ import time
 import traceback
 from pathlib import Path
 
-SEPARATORS = re.compile(r"&&|\|\||;|\||\n")
+# A lone `&` also separates commands, but `&>`, `>&`, `2>&1` and `&&` are not separators.
+SEPARATORS = re.compile(r"&&|\|\||;|\||\n|(?<![<>&])&(?![>&])")
+# Subshell/group openers, negation and compound-command keywords that precede a command.
+LEADERS = re.compile(r"^(?:[({]+\s*|!\s+|(?:then|do|else|elif|if|while|until)\b\s*)", re.I)
 PREFIXES = re.compile(
     r"^(?:"
-    r"sudo(?:\s+(?:-\w+|--[\w-]+(?:=\S+)?))*|"
-    r"doas(?:\s+-\w+)*|"
+    r"sudo(?:\s+(?:(?-i:-[ughpCDrtUT])\s+\S+|-\w+|--[\w-]+(?:=\S+)?))*|"
+    r"doas(?:\s+(?:(?-i:-[uC])\s+\S+|-\w+))*|"
     r"env(?:\s+(?:-\S+|[A-Za-z_][A-Za-z0-9_]*=\S+))*|"
     r"nohup|time|"
     r"nice(?:\s+(?:-n\s*-?\d+|-?\d+))?|"
-    r"timeout(?:\s+--?\S+(?:=\S+)?)*\s+\S+|"
+    r"timeout(?:\s+(?:(?-i:-[sk]|--signal|--kill-after)\s+\S+|--?\S+(?:=\S+)?))*\s+\S+|"
     r"setsid(?:\s+-\S+)*|"
     r"stdbuf(?:\s+-[ioe]\S+)*|"
     r"ionice(?:\s+(?:-[cnpt]\s*\S+|--[\w-]+(?:=\S+)?))*|"
@@ -159,9 +162,12 @@ def segments(command: str, depth: int = 0) -> list[str]:
         seg = raw.strip()
         while seg:
             stripped = PREFIXES.sub("", seg, count=1)
+            stripped = LEADERS.sub("", stripped.strip(), count=1)
             if stripped == seg:
                 break
             seg = stripped.strip()
+        while seg.endswith((")", "}")) and seg.count(")") + seg.count("}") > seg.count("(") + seg.count("{"):
+            seg = seg[:-1].rstrip()
         if not seg:
             continue
         m = SHELL_C.match(seg)
@@ -185,6 +191,17 @@ def tokens(seg: str) -> list[str]:
         return shlex.split(seg, posix=True)
     except ValueError:
         return seg.split()
+
+
+GIT_VALUE_OPTIONS = {"-c", "-C", "--git-dir", "--work-tree", "--namespace", "--exec-path", "--super-prefix", "--config-env"}
+
+
+def skip_git_global_options(toks: list[str]) -> list[str]:
+    """Drop git global options (`-C <dir>`, `-c k=v`, `--git-dir=...`) so toks[1] is the subcommand."""
+    i = 1
+    while i < len(toks) and toks[i].startswith("-"):
+        i += 2 if toks[i] in GIT_VALUE_OPTIONS else 1
+    return toks[:1] + toks[i:]
 
 
 def has_long(seg: str, name: str) -> bool:
@@ -253,6 +270,7 @@ def classify(seg: str) -> str | None:
     # Both actual git ref/branch deletions -- a local forced branch delete and a remote ref
     # delete via push -- stay blocked as before.
     if base == "git":
+        toks = skip_git_global_options(toks)
         sub = toks[1].lower() if len(toks) > 1 else ""
         if sub == "push":
             if has_long(seg, "delete") or any(re.match(r"^:[^\s]+$", t) for t in toks[2:]):

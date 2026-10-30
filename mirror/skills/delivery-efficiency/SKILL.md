@@ -1,6 +1,6 @@
 ---
 name: delivery-efficiency
-description: The operator's canonical development workflow for all projects: docs first, code complete before tests, actual reviewer agents, one PR per sprint, detailed record per commit, and final GPT approval before push/PR.
+description: The operator's canonical development workflow for all projects: docs first, code complete before tests, actual reviewer agents, one PR per sprint, short commit messages, and GPT-PM code approval before push/PR.
 ---
 
 # Canonical development workflow
@@ -12,8 +12,8 @@ privacy, tenant-isolation, legal, data-integrity, deletion, money, and platform 
 
 ## 1. Documentation and scope
 
-- New project: first prepare TDD, design, master plan, sprint plan with epics/stories, DoD, and test
-  coverage derived from requirements/stories. Functional-test-reviewer and e2e-runner own acceptance
+- New project: first prepare TDD, design, master plan, sprint plan with sprints and tasks (epics/gates only as documentation grouping of tasks,
+  no stories), DoD, and test coverage derived from requirements/tasks. Functional-test-reviewer and e2e-runner own acceptance
   coverage. Run several actual internal-agent review rounds to consensus, fix findings, then obtain
   GPT review before implementation.
 - Existing project: review the existing docs and code once to establish current state and next
@@ -27,10 +27,13 @@ privacy, tenant-isolation, legal, data-integrity, deletion, money, and platform 
 - Implement the accepted plan and all code for one sprint before starting tests or checks. Do not
   run checks during coding or divert into unrelated tasks. Commit coherent changes as development
   proceeds. A sprint produces one PR.
-- Every commit includes a dedicated detailed change-record file in that same commit, linked from
-  the commit message. Record what changed, why, affected behavior/contracts/paths, decisions, and
-  verification state so a new developer can understand it without chat history. Preserve commit
-  history; do not rewrite old commits just to retrofit records.
+- Commit messages are at most two sentences. No pre-commit change-record file and no link to one
+  (operator 2026-10-30). Preserve commit history; do not rewrite old commits.
+- After push and PR creation: update existing documents only where needed, record identified
+  problems in the retrospective, and add a short PR description to the decision log.
+  Documentation never blocks commit, push or merge. No new documentation after kickoff.
+- Two planning levels only: sprint and tasks. Epics or gates exist only as documentation labels
+  grouping tasks logically; never execution units or blockers. One task at a time; GPT-PM reviews code deltas only.
 - Resolve ordinary technical/sequencing questions independently. Put nonblocking unresolved items
   in the backlog for sprint end; investigate earlier only when they block other in-scope work.
 
@@ -41,12 +44,12 @@ privacy, tenant-isolation, legal, data-integrity, deletion, money, and platform 
   tests, fix defects with the implementer, and repeat relevant regression cycles until green.
 - Operator rule 2026-10-15 (GLOBAL): test-writing agents (`tdd-guide` as test-engineer,
   `performance-optimizer` as data-engineer/perf-tuning, `e2e-runner`, `functional-test-reviewer`) write detailed
-  functional scripts for every epic and run the COMPLETE set of tests they wrote (all files, not a
-  sample) after each epic, and everything they wrote once more after the last epic. The
+  functional scripts for every task and run the COMPLETE set of tests they wrote (all files, not a
+  sample) after each task, and everything they wrote once more after the last task. The
   coordinator never runs tests itself; repo-wide legacy suites/lint/CI stay prohibited.
 - Never weaken tests to manufacture a pass. Record exact commands/results. Unavailable runtime or
   provider evidence is `NOT_RUN` with its concrete dependency or error.
-- Required test suites are selected from accepted stories and gates, then authored and executed by
+- Required test suites are selected from accepted tasks and gates, then authored and executed by
   `functional-test-reviewer` and `e2e-runner` after coding completes. Delegate other requested
   verification to the relevant specialist. Record exact commands, revisions, results and limits.
 

@@ -156,3 +156,36 @@ them by letter rather than being inferred from the frustration alone.
 **Nothing else in §24 changed:** exact-head APPROVE, every required check green, mergeable, no
 admin bypass/force/disabled-check/weakened-protection are all still required, unconditionally, for
 every merge this section authorizes — including the newly-unblocked authority-surface class.
+
+## 2026-10-30 — Single canonical report format in the html-report skill
+
+Decision: the program/sprint report format (overall bar, per-sprint bars, active-sprint task table,
+legend and denominators, RU+EN pair checked with report_conform.py) is defined only in the
+`html-report` skill, triggered by "дай репорт". CLAUDE.md section 10, the sdlc-metrics skill, the
+memory index and the Codex AGENTS.md point to it instead of keeping their own copies.
+Evidence: git diff of skills/html-report/SKILL.md, skills/sdlc-metrics/SKILL.md, CLAUDE.md.
+Not run: report_conform.py (no RU/EN report pair existed to check).
+
+## 2026-10-30 — Golden reference report for html-report
+
+Decision: the operator-approved PDCC program status report pair is stored in
+skills/html-report/golden/ and the html-report skill requires agents to compare every new report
+against it (layout only, never its numbers). Known defect flagged in the skill: bare IN_PROGRESS labels.
+
+## 2026-10-30 — Sprint/task workflow and fast-work rules in the global contract
+
+Decision: CLAUDE.md section 5 now carries the operator's sprint/task workflow (two planning levels,
+one current task ID, commit before push, code-only GPT-PM review, docs after push, commit messages of
+at most two sentences, no pre-commit change record) and the fast-work residual-criterion rule.
+Epics and gates are allowed only as documentation labels that group tasks; they are never execution
+units or blockers. The delivery-efficiency skill and the memory index were aligned with this.
+Evidence: git diff of CLAUDE.md, skills/delivery-efficiency/SKILL.md, projects/d--repo/memory.
+Not run: no tests; text-only change. D:\Repo\AGENTS.md and ~/.codex/AGENTS.md are outside this repo.
+
+## 2026-10-30 - Pushed-closure percentage in every report
+
+Decision: html-report requires a headline percent of the project closed and pushed (commits reachable from the remote tip) with numerator, denominator, remote ref and hash. Codex skill copy synced from the Claude skill.
+
+## 2026-10-30 - Sweep of report-related memory notes
+
+Decision: commit the two pending memory notes (focus-only and readiness-percent) as they stand; they were edited by other sessions.
